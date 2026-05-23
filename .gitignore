@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.next/
+out/
+build/
+
+# Env
+.env
+.env.local
+.env.test
+
+# Playwright artifacts
+playwright-report/
+test-results/
+.playwright/.cache/
+
+# Editor
+.vscode/
+.idea/
+*.log
