@@ -1,4 +1,5 @@
 "use client"
+import { Button, Input, Label, TextField } from "@heroui/react"
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState, type FormEvent } from "react"
@@ -43,33 +44,34 @@ export function UsersManager(): JSX.Element {
     return (
         <div>
             <form onSubmit={onSubmit} data-testid="add-form">
-                <input
+                <Input
                     data-testid="input-name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="name"
                 />
-                <input
+                <Input
                     data-testid="input-email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="email"
                 />
-                <button type="submit" data-testid="btn-add">
+                <Button type="submit" data-testid="btn-add">
                     Add user
-                </button>
+                </Button>
             </form>
 
             <ul data-testid="users-list">
                 {usersQuery.data.map((u) => (
                     <li key={u.id} data-testid={`user-${u.id}`}>
                         {u.name} — {u.email}
-                        <button
+                        <Button
+                            type="button"
                             data-testid={`delete-${u.id}`}
                             onClick={() => removeMutation.mutate(u.id)}
                         >
                             Delete
-                        </button>
+                        </Button>
                     </li>
                 ))}
             </ul>

@@ -1,5 +1,7 @@
 import type { ReactNode } from "react"
 import { QueryProvider } from "../lib/query-client"
+import "./globals.css"
+import { HeroUIProvider } from "@/components/providers"
 
 /**
  * Root layout — bọc QueryProvider (EN: Root layout — wraps QueryProvider).
@@ -8,7 +10,9 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
     return (
         <html lang="en">
             <body>
-                <QueryProvider>{children}</QueryProvider>
+                <HeroUIProvider>
+                    <QueryProvider>{children}</QueryProvider>
+                </HeroUIProvider>
             </body>
         </html>
     )

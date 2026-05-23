@@ -1,4 +1,5 @@
 "use client"
+import { Button, Input, Label, TextField } from "@heroui/react"
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
@@ -56,14 +57,14 @@ export function OptimisticEditor(): JSX.Element {
             <div>
                 Editing #{first.id}: <span data-testid={`user-${first.id}-name`}>{first.name}</span>
             </div>
-            <input
+            <Input
                 data-testid="input-name"
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 placeholder="new name"
             />
             <label>
-                <input
+                <Input
                     type="checkbox"
                     data-testid="cb-fail"
                     checked={shouldFail}
@@ -71,12 +72,12 @@ export function OptimisticEditor(): JSX.Element {
                 />
                 Force server 500
             </label>
-            <button
+            <Button
                 data-testid="btn-save"
                 onClick={() => mutation.mutate({ id: first.id, name: draft || first.name, fail: shouldFail })}
             >
                 Save
-            </button>
+            </Button>
 
             <ul data-testid="users-list">
                 {usersQuery.data.map((u) => (

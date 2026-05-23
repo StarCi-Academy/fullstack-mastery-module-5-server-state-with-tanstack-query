@@ -1,4 +1,5 @@
 "use client"
+import { Button } from "@heroui/react"
 
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { fetchUsersPage, type UsersPage } from "../lib/api"
@@ -37,13 +38,13 @@ export function UsersFeed(): JSX.Element {
                     </li>
                 ))}
             </ul>
-            <button
+            <Button
                 data-testid="btn-load-more"
-                disabled={!query.hasNextPage || query.isFetchingNextPage}
+                isDisabled={!query.hasNextPage || query.isFetchingNextPage}
                 onClick={() => void query.fetchNextPage()}
             >
                 {query.isFetchingNextPage ? "Loading…" : "Load more"}
-            </button>
+            </Button>
         </div>
     )
 }
