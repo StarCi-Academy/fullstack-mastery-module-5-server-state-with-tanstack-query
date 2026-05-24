@@ -1,5 +1,5 @@
 "use client"
-import { Button, Input, Label, TextField } from "@heroui/react"
+import { Button, Checkbox, Input, Label } from "@heroui/react"
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
@@ -52,29 +52,44 @@ export function OptimisticEditor(): JSX.Element {
     const first = usersQuery.data[0]
 
     return (
-        <div>
-            <div data-testid="status">{mutation.isError ? "error" : mutation.isPending ? "saving" : "idle"}</div>
-            <div>
-                Editing #{first.id}: <span data-testid={`user-${first.id}-name`}>{first.name}</span>
+        <div className="flex flex-col gap-3">
+            <div data-testid="status">
+                {mutation.isError ? "error" : mutation.isPending ? "saving" : "idle"}
             </div>
-            <Input
-                data-testid="input-name"
-                value={draft}
-                onChange={(e) => setDraft(e.target.value)}
-                placeholder="new name"
-            />
-            <label>
+            <div>
+                Editing #{first.id}:{" "}
+                <span data-testid={`user-${first.id}-name`}>{first.name}</span>
+            </div>
+
+            <div className="flex flex-col gap-1">
+                <Label htmlFor="input-name">New name</Label>
                 <Input
-                    type="checkbox"
-                    data-testid="cb-fail"
-                    checked={shouldFail}
-                    onChange={(e) => setShouldFail(e.target.checked)}
+                    id="input-name"
+                    data-testid="input-name"
+                    value={draft}
+                    onChange={(e) => setDraft(e.target.value)}
+                    placeholder="new name"
                 />
-                Force server 500
-            </label>
+            </div>
+
+            <Checkbox
+                data-testid="cb-fail"
+                isSelected={shouldFail}
+                onChange={setShouldFail}
+            >
+                <Checkbox.Control>
+                    <Checkbox.Indicator />
+                </Checkbox.Control>
+                <Checkbox.Content>
+                    <Label>Force server 500</Label>
+                </Checkbox.Content>
+            </Checkbox>
+
             <Button
                 data-testid="btn-save"
-                onClick={() => mutation.mutate({ id: first.id, name: draft || first.name, fail: shouldFail })}
+                onPress={() =>
+                    mutation.mutate({ id: first.id, name: draft || first.name, fail: shouldFail })
+                }
             >
                 Save
             </Button>

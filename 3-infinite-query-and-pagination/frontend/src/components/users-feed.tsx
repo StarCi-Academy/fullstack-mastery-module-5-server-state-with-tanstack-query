@@ -41,7 +41,7 @@ export function UsersFeed(): JSX.Element {
             <Button
                 data-testid="btn-load-more"
                 isDisabled={!query.hasNextPage || query.isFetchingNextPage}
-                onClick={() => void query.fetchNextPage()}
+                onPress={() => void query.fetchNextPage()}
             >
                 {query.isFetchingNextPage ? "Loading…" : "Load more"}
             </Button>
