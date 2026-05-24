@@ -2,7 +2,8 @@ import { defineConfig, devices } from "@playwright/test"
 
 /**
  * Cấu hình Playwright — testDir trỏ tới ./scripts (cùng folder .playwright/).
- * (EN: Playwright config — testDir points to ./scripts (sibling of .playwright/).)
+ * webServer khởi động NestJS (3000) và Next.js (3001) nếu chưa chạy.
+ * (EN: Playwright config — testDir ./scripts. webServer starts NestJS [3000] and Next.js [3001] if not already running.)
  */
 export default defineConfig({
     testDir: "./scripts",
@@ -12,13 +13,22 @@ export default defineConfig({
         trace: "on-first-retry",
         screenshot: "only-on-failure",
     },
-    webServer: {
-        command: "npm run dev",
-        cwd: "../frontend",
-        port: 3001,
-        reuseExistingServer: !process.env.CI,
-        timeout: 60_000,
-    },
+    webServer: [
+        {
+            command: "npm install --prefer-offline && npx nest start",
+            cwd: "../backend",
+            port: 3000,
+            reuseExistingServer: !process.env.CI,
+            timeout: 120_000,
+        },
+        {
+            command: "npm install --prefer-offline && npm run dev",
+            cwd: "../frontend",
+            port: 3001,
+            reuseExistingServer: !process.env.CI,
+            timeout: 120_000,
+        },
+    ],
     projects: [
         {
             name: "chromium",

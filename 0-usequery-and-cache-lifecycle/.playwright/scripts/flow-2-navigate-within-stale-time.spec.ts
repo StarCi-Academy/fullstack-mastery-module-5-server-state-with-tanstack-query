@@ -10,7 +10,9 @@ import { test, expect } from "@playwright/test"
 test("flow 2 — re-mount within staleTime hits cache (one network call)", async ({ page }) => {
     let usersCalls = 0
     page.on("request", (req) => {
-        if (req.url().includes("/users") && req.method() === "GET") {
+        // Chỉ đếm request đến NestJS API, bỏ qua page navigation / RSC prefetch của Next.js.
+        // (EN: Count only NestJS API calls, ignoring Next.js page navigation and RSC prefetch.)
+        if (req.url().startsWith("http://localhost:3000/users") && req.method() === "GET") {
             usersCalls += 1
         }
     })

@@ -10,7 +10,9 @@ import { test, expect } from "@playwright/test"
 test("flow 3 — window blur+focus triggers a background refetch", async ({ page, context }) => {
     let usersCalls = 0
     page.on("request", (req) => {
-        if (req.url().includes("/users") && req.method() === "GET") {
+        // Chỉ đếm request đến NestJS API, bỏ qua page navigation / RSC prefetch của Next.js.
+        // (EN: Count only NestJS API calls, ignoring Next.js page navigation and RSC prefetch.)
+        if (req.url().startsWith("http://localhost:3000/users") && req.method() === "GET") {
             usersCalls += 1
         }
     })
@@ -20,12 +22,13 @@ test("flow 3 — window blur+focus triggers a background refetch", async ({ page
     await expect(page.getByTestId("users-list")).toBeVisible()
     expect(usersCalls).toBe(1)
 
-    // Bước 2: mở tab phụ rồi đóng để blur/focus trang chính
-    // (EN: Step 2: open a second tab then close it to blur/focus the main page)
-    const tab2 = await context.newPage()
-    await tab2.goto("about:blank")
-    await tab2.close()
-    await page.bringToFront()
+    // Bước 2: dispatch visibilitychange để simulate window regain focus
+    // (EN: Step 2: dispatch visibilitychange to simulate window regaining focus)
+    // TanStack Query v5 lắng nghe 'visibilitychange' (không phải 'focus') để trigger refetch.
+    // bringToFront/tab switching không đủ trong Playwright headless; dispatch thủ công là cách đáng tin.
+    // (EN: TanStack Query v5 subscribes to 'visibilitychange' not 'focus' for refetch triggering.
+    // bringToFront/tab switching is unreliable in Playwright headless; direct dispatch is the correct approach.)
+    await page.evaluate(() => window.dispatchEvent(new Event("visibilitychange")))
 
     // Bước 3: chờ refetch thứ hai (EN: Step 3: wait for the second fetch)
     await expect.poll(() => usersCalls, { timeout: 5_000 }).toBeGreaterThanOrEqual(2)

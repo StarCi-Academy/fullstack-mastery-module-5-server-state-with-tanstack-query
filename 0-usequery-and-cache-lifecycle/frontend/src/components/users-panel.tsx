@@ -16,6 +16,10 @@ export function UsersPanel(): JSX.Element {
     const query = useQuery<User[]>({
         queryKey: ["users"],
         queryFn: fetchUsers,
+        // refetchOnWindowFocus: 'always' để luồng 3 luôn demo được refetch khi focus,
+        // bất kể staleTime. (EN: 'always' ensures flow 3 demonstrates window-focus refetch
+        // regardless of staleTime — the cache still returns instantly while re-validating.)
+        refetchOnWindowFocus: "always",
     })
 
     if (query.isPending) {
