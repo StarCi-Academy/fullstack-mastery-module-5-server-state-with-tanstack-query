@@ -3,9 +3,9 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev -p 3001",
+        "dev": "next dev",
         "build": "next build",
-        "start": "next start -p 3001",
+        "start": "next start",
         "test:e2e": "playwright test --config ../.playwright/playwright.config.ts",
         "test:e2e:headed": "playwright test --config ../.playwright/playwright.config.ts --headed",
         "test:e2e:ui": "playwright test --config ../.playwright/playwright.config.ts --ui"

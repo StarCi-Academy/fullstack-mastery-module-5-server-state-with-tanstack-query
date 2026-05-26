@@ -1,16 +1,20 @@
 import { NestFactory } from "@nestjs/core"
 import { ValidationPipe } from "@nestjs/common"
+import { ConfigService } from "@nestjs/config"
 import { AppModule } from "./app.module"
+import type { AppConfig } from "./config"
 
 /**
- * Bootstrap NestJS stub trên cổng 3000.
- * (EN: Bootstrap NestJS stub on port 3000.)
+ * Bootstrap NestJS — port + CORS origin đọc từ ConfigService (env-driven).
+ * (EN: Bootstrap NestJS — port + CORS origin sourced from ConfigService [env-driven].)
  */
 async function bootstrap(): Promise<void> {
     const app = await NestFactory.create(AppModule)
-    app.enableCors({ origin: "http://localhost:3001" })
+    const configService = app.get(ConfigService)
+    const { port, frontendOrigin } = configService.getOrThrow<AppConfig>("app")
+    app.enableCors({ origin: frontendOrigin })
     app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }))
-    await app.listen(3000)
+    await app.listen(port)
 }
 
 bootstrap()
