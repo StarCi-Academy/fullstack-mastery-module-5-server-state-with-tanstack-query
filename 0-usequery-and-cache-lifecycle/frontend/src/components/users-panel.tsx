@@ -6,6 +6,7 @@ import {
     AvatarFallback,
     AvatarImage,
     Button,
+    ListBox,
     Skeleton,
     Spinner,
 } from "@heroui/react"
@@ -86,28 +87,37 @@ export function UsersPanel(): JSX.Element {
                     Error: {(query.error as Error).message}
                 </p>
             ) : (
-                <ul className="flex flex-col gap-0.5" data-testid="users-list">
+                <ListBox
+                    aria-label="Users"
+                    selectionMode="none"
+                    data-testid="users-list"
+                    className="gap-0.5"
+                >
                     {query.data.map((user) => (
-                        <li
+                        <ListBox.Item
                             key={user.id}
+                            id={String(user.id)}
+                            textValue={user.name}
                             data-testid={`user-${user.id}`}
-                            className="flex items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-default-100"
+                            className="rounded-xl px-2 py-2 data-[hovered=true]:bg-default-100"
                         >
-                            <Avatar size="sm" className="shrink-0">
-                                <AvatarImage src={avatarUrl(user.email)} alt={user.name} />
-                                <AvatarFallback>{initials(user.name)}</AvatarFallback>
-                            </Avatar>
-                            <div className="flex min-w-0 flex-col">
-                                <span className="truncate text-sm font-medium text-foreground">
-                                    {user.name}
-                                </span>
-                                <span className="truncate text-xs text-muted">
-                                    {user.email}
-                                </span>
+                            <div className="flex items-center gap-3">
+                                <Avatar size="sm" className="shrink-0">
+                                    <AvatarImage src={avatarUrl(user.email)} alt={user.name} />
+                                    <AvatarFallback>{initials(user.name)}</AvatarFallback>
+                                </Avatar>
+                                <div className="flex min-w-0 flex-col">
+                                    <span className="truncate text-sm font-medium text-foreground">
+                                        {user.name}
+                                    </span>
+                                    <span className="truncate text-xs text-muted">
+                                        {user.email}
+                                    </span>
+                                </div>
                             </div>
-                        </li>
+                        </ListBox.Item>
                     ))}
-                </ul>
+                </ListBox>
             )}
         </div>
     )
