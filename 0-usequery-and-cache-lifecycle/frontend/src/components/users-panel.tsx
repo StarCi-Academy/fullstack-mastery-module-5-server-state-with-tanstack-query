@@ -10,7 +10,6 @@ import {
     Skeleton,
     Spinner,
 } from "@heroui/react"
-import { ArrowRotateLeft } from "@gravity-ui/icons"
 import { fetchUsers, type User } from "../lib/api"
 
 /** Deterministic avatar photo per user (seeded by email). */
@@ -59,9 +58,7 @@ export function UsersPanel(): JSX.Element {
                 >
                     {({ isPending }) => (
                         <>
-                            {isPending
-                                ? <Spinner color="current" size="sm" />
-                                : <ArrowRotateLeft />}
+                            {isPending ? <Spinner color="current" size="sm" /> : null}
                             Refresh
                         </>
                     )}
