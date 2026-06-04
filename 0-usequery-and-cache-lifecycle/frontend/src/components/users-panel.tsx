@@ -39,31 +39,32 @@ export function UsersPanel(): JSX.Element {
     return (
         <div className="flex flex-col">
             {/* lesson intro */}
-            <h1 className="text-base font-semibold text-foreground">
+            <div className="text-base font-semibold text-foreground">
                 useQuery &amp; Cache Lifecycle
-            </h1>
+            </div>
             <div className="h-3" />
-            <p className="text-sm text-muted">
+            <div className="text-sm text-muted">
                 A single useQuery subscribes to the cache — it renders instantly from
                 cache and re-validates in the background on window focus.
-            </p>
+            </div>
 
             <div className="h-6" />
 
             {/* refresh action */}
             <div className="flex justify-end">
                 <Button
-                    isIconOnly
-                    size="sm"
-                    variant="tertiary"
+                    variant="primary"
                     isPending={query.isFetching}
                     onPress={() => { void query.refetch() }}
                 >
-                    {({ isPending }) =>
-                        isPending
-                            ? <Spinner className="size-4" />
-                            : <ArrowsClockwise className="size-5" weight="bold" />
-                    }
+                    {({ isPending }) => (
+                        <>
+                            Refresh
+                            {isPending
+                                ? <Spinner />
+                                : <ArrowsClockwise className="size-5" weight="bold" />}
+                        </>
+                    )}
                 </Button>
             </div>
 
