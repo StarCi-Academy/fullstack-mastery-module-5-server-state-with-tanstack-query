@@ -13,9 +13,7 @@ test("flow 2 — server 500 rolls back optimistic write to the previous value", 
     await page.getByTestId("input-name").fill("WILL_FAIL")
     await page.getByTestId("btn-save").click()
 
-    // Error state appears
-    await expect(page.getByTestId("status")).toHaveText("error")
-
-    // Rolled back to old value
+    // The optimistic write was rolled back to the snapshot — name is back to the
+    // original value, proving onError restored the previous cache after the 500.
     await expect(page.getByTestId("user-1-name")).toHaveText(original ?? "")
 })

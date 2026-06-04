@@ -5,7 +5,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Skeleton } from "@heroui/react"
 import { fetchUsers, patchUser, type User } from "../../lib/api"
 import { UserName } from "./UserName"
-import { StatusChip } from "./StatusChip"
 import { NameEditor } from "./NameEditor"
 
 const USERS_KEY = ["users"] as const
@@ -72,11 +71,8 @@ export function OptimisticEditor(): JSX.Element {
 
     return (
         <div className="flex flex-col">
-            <div className="flex items-center justify-between">
-                <div className="text-base font-semibold text-foreground">
-                    Optimistic Updates &amp; Rollback
-                </div>
-                <StatusChip status={mutation.isError ? "error" : mutation.isPending ? "saving" : "idle"} />
+            <div className="text-base font-semibold text-foreground">
+                Optimistic Updates &amp; Rollback
             </div>
             <div className="h-3" />
             <div className="text-sm text-muted">
