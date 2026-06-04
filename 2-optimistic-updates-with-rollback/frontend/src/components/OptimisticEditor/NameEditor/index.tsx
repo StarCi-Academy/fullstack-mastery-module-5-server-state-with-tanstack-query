@@ -1,5 +1,4 @@
 import { Button, Checkbox, Input, Label, Spinner, TextField } from "@heroui/react"
-import { FloppyDisk } from "@gravity-ui/icons"
 
 interface NameEditorProps {
     draft: string
@@ -54,11 +53,7 @@ export function NameEditor({
                 >
                     {({ isPending: pending }) => (
                         <>
-                            {pending ? (
-                                <Spinner color="current" size="sm" />
-                            ) : (
-                                <FloppyDisk />
-                            )}
+                            {pending ? <Spinner color="current" size="sm" /> : null}
                             Save
                         </>
                     )}

@@ -13,9 +13,13 @@ const colorMap: Record<Status, "default" | "warning" | "danger"> = {
 }
 
 /**
- * StatusChip — shows current mutation state (idle / saving / error).
+ * StatusChip — shows the active mutation state (saving / error). Renders nothing
+ * while idle, so the editor header stays clean until something is happening.
  */
-export function StatusChip({ status }: StatusChipProps): JSX.Element {
+export function StatusChip({ status }: StatusChipProps): JSX.Element | null {
+    if (status === "idle") {
+        return null
+    }
     return (
         <Chip
             variant="soft"
