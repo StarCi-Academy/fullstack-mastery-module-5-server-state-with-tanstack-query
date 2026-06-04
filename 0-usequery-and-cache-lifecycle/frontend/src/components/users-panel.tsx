@@ -47,7 +47,7 @@ export function UsersPanel(): JSX.Element {
                 cache and re-validates in the background on window focus.
             </div>
 
-            <div className="h-6" />
+            <div className="h-3" />
 
             {/* refresh action */}
             <div className="flex justify-start">

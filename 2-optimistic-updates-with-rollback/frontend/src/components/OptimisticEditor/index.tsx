@@ -81,7 +81,7 @@ export function OptimisticEditor(): JSX.Element {
                 <code>onMutate</code>.
             </div>
 
-            <div className="h-6" />
+            <div className="h-3" />
 
             <UserName user={first} />
 

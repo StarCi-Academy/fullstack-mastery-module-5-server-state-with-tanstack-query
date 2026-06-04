@@ -85,7 +85,7 @@ export function UsersFeed(): JSX.Element {
                 <code>false</code>. Scroll the list to auto-load more.
             </div>
 
-            <div className="h-6" />
+            <div className="h-3" />
 
             {query.isError ? (
                 <p
