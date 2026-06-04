@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { Skeleton } from "@heroui/react"
 import { fetchUsersPage, type UsersPage } from "../../lib/api"
@@ -9,10 +10,12 @@ import { LoadMoreBar } from "./LoadMoreBar"
 const PAGE_SIZE = 10
 
 /**
- * UsersFeed — useInfiniteQuery with cursor pagination.
+ * UsersFeed — useInfiniteQuery with cursor pagination + infinite scroll.
  *
  * getNextPageParam reads nextCursor from the last page; null → hasNextPage=false.
- * All pages are accumulated in query.data.pages so the list never resets.
+ * All pages accumulate in query.data.pages so the list never resets. A sentinel
+ * at the end of the list auto-fetches the next page when scrolled into view; the
+ * Load more button remains as an explicit fallback.
  */
 export function UsersFeed(): JSX.Element {
     const query = useInfiniteQuery<UsersPage, Error>({
@@ -22,6 +25,27 @@ export function UsersFeed(): JSX.Element {
         initialPageParam: 0,
         getNextPageParam: (last) => last.nextCursor,
     })
+
+    const { hasNextPage, isFetchingNextPage, fetchNextPage } = query
+
+    // Infinite scroll: observe a sentinel after the list. When it enters the
+    // viewport (with a 160px pre-fetch margin) and there is a next page that
+    // isn't already loading, fetch it — so scrolling down keeps loading rows.
+    const sentinelRef = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        const el = sentinelRef.current
+        if (!el) return
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0]?.isIntersecting && hasNextPage && !isFetchingNextPage) {
+                    void fetchNextPage()
+                }
+            },
+            { rootMargin: "160px" },
+        )
+        observer.observe(el)
+        return () => observer.disconnect()
+    }, [hasNextPage, isFetchingNextPage, fetchNextPage])
 
     if (query.isPending) {
         return (
@@ -62,10 +86,14 @@ export function UsersFeed(): JSX.Element {
                 <code>useInfiniteQuery</code> accumulates pages under one cache key.{" "}
                 <code>getNextPageParam</code> derives the next cursor from the last page;
                 when it returns <code>null</code>, <code>hasNextPage</code> becomes{" "}
-                <code>false</code>.
+                <code>false</code>. Scroll to the bottom to auto-load more.
             </div>
 
             <div className="h-6" />
+
+            <UserList users={all} />
+
+            <div className="h-3" />
 
             <LoadMoreBar
                 total={all.length}
@@ -74,9 +102,8 @@ export function UsersFeed(): JSX.Element {
                 onLoadMore={() => void query.fetchNextPage()}
             />
 
-            <div className="h-3" />
-
-            <UserList users={all} />
+            {/* Sentinel observed for infinite scroll — kept at the very bottom. */}
+            <div ref={sentinelRef} aria-hidden className="h-px w-full" />
         </div>
     )
 }
