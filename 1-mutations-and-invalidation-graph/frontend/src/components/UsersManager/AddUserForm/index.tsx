@@ -1,5 +1,4 @@
 import { Button, Input, Label, Spinner, TextField } from "@heroui/react"
-import { Plus } from "@gravity-ui/icons"
 
 interface AddUserFormProps {
     name: string
@@ -56,11 +55,7 @@ export function AddUserForm({
                 >
                     {({ isPending: pending }) => (
                         <>
-                            {pending ? (
-                                <Spinner color="current" size="sm" />
-                            ) : (
-                                <Plus />
-                            )}
+                            {pending ? <Spinner color="current" size="sm" /> : null}
                             Add user
                         </>
                     )}

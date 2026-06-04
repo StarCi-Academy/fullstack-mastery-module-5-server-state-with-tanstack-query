@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage, Button } from "@heroui/react"
-import { TrashBin } from "@gravity-ui/icons"
 import type { User } from "../../../lib/api"
 
 interface UserListItemProps {
@@ -36,7 +35,7 @@ export function UserListItem({ user, onDelete }: UserListItemProps): JSX.Element
                 onPress={() => onDelete(user.id)}
                 aria-label={`Delete ${user.name}`}
             >
-                <TrashBin />
+                Delete
             </Button>
         </div>
     )
