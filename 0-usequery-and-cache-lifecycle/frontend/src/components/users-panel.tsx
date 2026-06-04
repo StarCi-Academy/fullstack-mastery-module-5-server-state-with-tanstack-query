@@ -10,7 +10,7 @@ import {
     Skeleton,
     Spinner,
 } from "@heroui/react"
-import { ArrowsClockwise } from "@phosphor-icons/react"
+import { ArrowRotateLeft } from "@gravity-ui/icons"
 import { fetchUsers, type User } from "../lib/api"
 
 /** Deterministic avatar photo per user (seeded by email). */
@@ -51,7 +51,7 @@ export function UsersPanel(): JSX.Element {
             <div className="h-6" />
 
             {/* refresh action */}
-            <div className="flex justify-end">
+            <div className="flex justify-start">
                 <Button
                     variant="primary"
                     isPending={query.isFetching}
@@ -59,10 +59,10 @@ export function UsersPanel(): JSX.Element {
                 >
                     {({ isPending }) => (
                         <>
-                            Refresh
                             {isPending
-                                ? <Spinner />
-                                : <ArrowsClockwise className="size-5" weight="bold" />}
+                                ? <Spinner color="current" size="sm" />
+                                : <ArrowRotateLeft />}
+                            Refresh
                         </>
                     )}
                 </Button>
