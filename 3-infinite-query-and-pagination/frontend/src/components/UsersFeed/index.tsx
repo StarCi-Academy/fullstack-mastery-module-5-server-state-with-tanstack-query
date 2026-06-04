@@ -9,13 +9,31 @@ import { LoadMoreBar } from "./LoadMoreBar"
 
 const PAGE_SIZE = 10
 
+/** Three placeholder rows shown while a page is loading. */
+function SkeletonRows({ testId }: { testId?: string }): JSX.Element {
+    return (
+        <div className="flex flex-col gap-1" data-testid={testId}>
+            {[0, 1, 2].map((row) => (
+                <div key={row} className="flex items-center gap-3 px-2 py-2">
+                    <Skeleton className="size-9 shrink-0 rounded-full" />
+                    <div className="flex flex-1 flex-col gap-1.5">
+                        <Skeleton className="h-3.5 w-28 rounded-md" />
+                        <Skeleton className="h-3 w-40 rounded-md" />
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+}
+
 /**
  * UsersFeed — useInfiniteQuery with cursor pagination + infinite scroll.
  *
  * getNextPageParam reads nextCursor from the last page; null → hasNextPage=false.
  * All pages accumulate in query.data.pages so the list never resets. A sentinel
  * at the end of the list auto-fetches the next page when scrolled into view; the
- * Load more button remains as an explicit fallback.
+ * Load more button remains as an explicit fallback. The title/description always
+ * render; only the list shows a skeleton (initial load + while a next page loads).
  */
 export function UsersFeed(): JSX.Element {
     const query = useInfiniteQuery<UsersPage, Error>({
@@ -47,37 +65,11 @@ export function UsersFeed(): JSX.Element {
         return () => observer.disconnect()
     }, [hasNextPage, isFetchingNextPage, fetchNextPage])
 
-    if (query.isPending) {
-        return (
-            <div className="flex flex-col gap-1" data-testid="users-skeleton">
-                {[0, 1, 2].map((row) => (
-                    <div key={row} className="flex items-center gap-3 px-2 py-2">
-                        <Skeleton className="size-9 shrink-0 rounded-full" />
-                        <div className="flex flex-1 flex-col gap-1.5">
-                            <Skeleton className="h-3.5 w-28 rounded-md" />
-                            <Skeleton className="h-3 w-40 rounded-md" />
-                        </div>
-                    </div>
-                ))}
-            </div>
-        )
-    }
-
-    if (query.isError) {
-        return (
-            <p
-                className="py-6 text-center text-sm font-medium text-danger"
-                data-testid="users-error"
-            >
-                Error: {(query.error as Error).message}
-            </p>
-        )
-    }
-
-    const all = query.data.pages.flatMap((p) => p.data)
+    const all = query.isSuccess ? query.data.pages.flatMap((p) => p.data) : []
 
     return (
         <div className="flex flex-col">
+            {/* Header always renders — never skeletoned, it has no data dependency. */}
             <div className="text-base font-semibold text-foreground">
                 Infinite Query &amp; Cursor Pagination
             </div>
@@ -91,19 +83,41 @@ export function UsersFeed(): JSX.Element {
 
             <div className="h-6" />
 
-            <UserList users={all} />
+            {query.isError ? (
+                <p
+                    className="py-6 text-center text-sm font-medium text-danger"
+                    data-testid="users-error"
+                >
+                    Error: {(query.error as Error).message}
+                </p>
+            ) : query.isPending ? (
+                // Initial load — placeholder rows for the very first page.
+                <SkeletonRows testId="users-skeleton" />
+            ) : (
+                <>
+                    <UserList users={all} />
 
-            <div className="h-3" />
+                    {/* Loading the next page (scroll or button) — signal with rows. */}
+                    {isFetchingNextPage ? (
+                        <>
+                            <div className="h-1" />
+                            <SkeletonRows testId="users-loading-more" />
+                        </>
+                    ) : null}
 
-            <LoadMoreBar
-                total={all.length}
-                hasNextPage={query.hasNextPage}
-                isFetchingNextPage={query.isFetchingNextPage}
-                onLoadMore={() => void query.fetchNextPage()}
-            />
+                    <div className="h-3" />
 
-            {/* Sentinel observed for infinite scroll — kept at the very bottom. */}
-            <div ref={sentinelRef} aria-hidden className="h-px w-full" />
+                    <LoadMoreBar
+                        total={all.length}
+                        hasNextPage={hasNextPage}
+                        isFetchingNextPage={isFetchingNextPage}
+                        onLoadMore={() => void fetchNextPage()}
+                    />
+
+                    {/* Sentinel observed for infinite scroll — kept at the very bottom. */}
+                    <div ref={sentinelRef} aria-hidden className="h-px w-full" />
+                </>
+            )}
         </div>
     )
 }
