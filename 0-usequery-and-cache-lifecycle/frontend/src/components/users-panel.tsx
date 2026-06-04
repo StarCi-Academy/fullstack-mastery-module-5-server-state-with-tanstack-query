@@ -36,35 +36,37 @@ export function UsersPanel(): JSX.Element {
     })
 
     return (
-        <div className="flex flex-col gap-5">
-            {/* lesson intro: title + muted description */}
-            <header className="flex flex-col gap-1">
-                <h1 className="text-xl font-semibold text-foreground">
-                    useQuery &amp; Cache Lifecycle
-                </h1>
-                <p className="text-sm text-default-500">
-                    A single useQuery subscribes to the cache — it renders instantly from
-                    cache and re-validates in the background on window focus.
-                </p>
-            </header>
+        <div className="flex flex-col">
+            {/* lesson intro */}
+            <h1 className="text-base font-semibold text-foreground">
+                useQuery &amp; Cache Lifecycle
+            </h1>
+            <div className="h-3" />
+            <p className="text-sm text-muted">
+                A single useQuery subscribes to the cache — it renders instantly from
+                cache and re-validates in the background on window focus.
+            </p>
 
-            {/* list label + icon-only refresh */}
-            <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-default-500">Users</span>
+            <div className="h-6" />
+
+            {/* refresh action */}
+            <div className="flex justify-end">
                 <Button
                     isIconOnly
                     size="sm"
-                    variant="secondary"
+                    variant="tertiary"
                     isPending={query.isFetching}
                     onPress={() => { void query.refetch() }}
                 >
                     {({ isPending }) =>
                         isPending
                             ? <Spinner className="size-4" />
-                            : <ArrowsClockwise size={16} weight="bold" />
+                            : <ArrowsClockwise className="size-5" weight="bold" />
                     }
                 </Button>
             </div>
+
+            <div className="h-3" />
 
             {/* body: skeleton → error → list */}
             {query.isPending ? (
@@ -99,7 +101,7 @@ export function UsersPanel(): JSX.Element {
                                 <span className="truncate text-sm font-medium text-foreground">
                                     {user.name}
                                 </span>
-                                <span className="truncate text-xs text-default-500">
+                                <span className="truncate text-xs text-muted">
                                     {user.email}
                                 </span>
                             </div>
