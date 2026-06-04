@@ -59,7 +59,7 @@ export function UsersPanel(): JSX.Element {
                     {({ isPending }) => (
                         <>
                             {isPending ? <Spinner color="current" size="sm" /> : null}
-                            Refresh
+                            Refetch
                         </>
                     )}
                 </Button>
