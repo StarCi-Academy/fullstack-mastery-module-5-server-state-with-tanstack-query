@@ -3,18 +3,16 @@ import { QueryProvider } from "./lib/query-client"
 import { OptimisticEditor } from "./components"
 
 /**
- * App root — wires up the HeroUI and TanStack Query providers around the
- * OptimisticEditor demo. No routing is needed for this single-page lesson.
+ * App root — providers + the single optimistic editor panel.
  */
-export default function App() {
+export default function App(): JSX.Element {
     return (
         <HeroUIProvider>
             <QueryProvider>
-                <main className="min-h-screen p-6 max-w-3xl mx-auto flex flex-col gap-6">
-                    <h1 className="text-2xl font-semibold text-foreground">
-                        M5 L2 — Optimistic updates with rollback
-                    </h1>
-                    <OptimisticEditor />
+                <main className="min-h-screen bg-background p-3">
+                    <div className="mx-auto max-w-2xl">
+                        <OptimisticEditor />
+                    </div>
                 </main>
             </QueryProvider>
         </HeroUIProvider>

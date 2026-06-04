@@ -1,1 +1,4 @@
-export * from "./optimistic-editor"
+/**
+ * Components barrel.
+ */
+export * from "./OptimisticEditor"

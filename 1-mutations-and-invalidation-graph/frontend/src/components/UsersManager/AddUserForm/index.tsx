@@ -1,0 +1,71 @@
+import { Button, Input, Label, Spinner, TextField } from "@heroui/react"
+import { Plus } from "@gravity-ui/icons"
+
+interface AddUserFormProps {
+    name: string
+    email: string
+    onNameChange: (v: string) => void
+    onEmailChange: (v: string) => void
+    isPending: boolean
+    onSubmit: () => void
+}
+
+/**
+ * AddUserForm — controlled form with name + email inputs and an add button.
+ */
+export function AddUserForm({
+    name,
+    email,
+    onNameChange,
+    onEmailChange,
+    isPending,
+    onSubmit,
+}: AddUserFormProps): JSX.Element {
+    return (
+        <form
+            className="flex flex-col gap-3"
+            onSubmit={(e) => {
+                e.preventDefault()
+                onSubmit()
+            }}
+        >
+            <TextField
+                value={name}
+                onChange={onNameChange}
+                className="flex flex-col gap-1"
+            >
+                <Label className="text-sm text-muted">Name</Label>
+                <Input data-testid="input-name" placeholder="Alice" />
+            </TextField>
+
+            <TextField
+                value={email}
+                onChange={onEmailChange}
+                className="flex flex-col gap-1"
+            >
+                <Label className="text-sm text-muted">Email</Label>
+                <Input data-testid="input-email" placeholder="alice@example.com" />
+            </TextField>
+
+            <div className="flex justify-start">
+                <Button
+                    type="submit"
+                    variant="primary"
+                    isPending={isPending}
+                    data-testid="btn-add"
+                >
+                    {({ isPending: pending }) => (
+                        <>
+                            {pending ? (
+                                <Spinner color="current" size="sm" />
+                            ) : (
+                                <Plus />
+                            )}
+                            Add user
+                        </>
+                    )}
+                </Button>
+            </div>
+        </form>
+    )
+}

@@ -1,1 +1,4 @@
-export * from "./users-feed"
+/**
+ * Components barrel.
+ */
+export * from "./UsersFeed"

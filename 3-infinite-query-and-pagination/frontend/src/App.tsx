@@ -3,17 +3,16 @@ import { QueryProvider } from "./lib/query-client"
 import { UsersFeed } from "./components"
 
 /**
- * App root — wires providers and renders the users feed.
+ * App root — providers + the single users feed panel.
  */
-export default function App() {
+export default function App(): JSX.Element {
     return (
         <HeroUIProvider>
             <QueryProvider>
-                <main className="min-h-screen p-6 max-w-3xl mx-auto flex flex-col gap-6">
-                    <h1 className="text-2xl font-semibold text-foreground">
-                        M5 L3 — Infinite query & cursor pagination
-                    </h1>
-                    <UsersFeed />
+                <main className="min-h-screen bg-background p-3">
+                    <div className="mx-auto max-w-2xl">
+                        <UsersFeed />
+                    </div>
                 </main>
             </QueryProvider>
         </HeroUIProvider>

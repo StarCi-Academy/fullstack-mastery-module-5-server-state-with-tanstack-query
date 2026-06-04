@@ -11,14 +11,14 @@
         "test:e2e:ui": "playwright test --config ../.playwright/playwright.config.ts --ui"
     },
     "dependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
         "@heroui/react": "^3.0.2",
         "@heroui/styles": "^3.0.2",
-        "@tanstack/react-query": "^5.51.0",
-        "@tanstack/react-query-devtools": "^5.51.0",
-        "formik": "^2.4.9",
+        "@gravity-ui/icons": "^2.12.0",
         "framer-motion": "^11.0.0",
-        "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "@tanstack/react-query": "^5.51.0",
+        "@tanstack/react-query-devtools": "^5.51.0"
     },
     "devDependencies": {
         "@playwright/test": "^1.45.0",
