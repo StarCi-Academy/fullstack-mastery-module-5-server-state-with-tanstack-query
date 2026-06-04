@@ -3,13 +3,13 @@
  */
 export type User = { id: number; name: string; email: string }
 
-const BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:3000"
+const BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:3000"
 
 /**
  * Fetch user list.
  */
 export async function fetchUsers(): Promise<User[]> {
-    const res = await fetch(`${BASE}/users`, { cache: "no-store" })
+    const res = await fetch(`${BASE}/users`)
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     return (await res.json()) as User[]
 }

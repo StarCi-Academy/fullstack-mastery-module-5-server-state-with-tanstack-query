@@ -1,4 +1,3 @@
-"use client"
 import { Avatar, Button, Card, Chip, Skeleton } from "@heroui/react"
 
 import { useInfiniteQuery } from "@tanstack/react-query"
@@ -11,7 +10,7 @@ const PAGE_SIZE = 10
  *
  * `getNextPageParam` reads `nextCursor` from the last page; null means hasNextPage=false.
  */
-export function UsersFeed(): JSX.Element {
+export function UsersFeed() {
     const query = useInfiniteQuery<UsersPage, Error>({
         queryKey: ["users", "infinite"],
         queryFn: ({ pageParam }) =>

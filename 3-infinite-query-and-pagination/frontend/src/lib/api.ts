@@ -11,7 +11,7 @@ export interface UsersPage {
     nextCursor: number | null
 }
 
-const BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:3000"
+const BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:3000"
 
 /**
  * Fetch a single page by cursor + limit.
@@ -21,7 +21,7 @@ export async function fetchUsersPage(args: {
     limit: number
 }): Promise<UsersPage> {
     const url = `${BASE}/users?cursor=${args.cursor}&limit=${args.limit}`
-    const res = await fetch(url, { cache: "no-store" })
+    const res = await fetch(url)
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     return (await res.json()) as UsersPage
 }

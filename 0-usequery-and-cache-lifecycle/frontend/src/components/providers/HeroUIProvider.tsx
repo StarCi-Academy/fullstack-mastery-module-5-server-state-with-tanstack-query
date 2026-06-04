@@ -1,5 +1,3 @@
-"use client"
-
 import type { PropsWithChildren } from "react"
 import { I18nProvider } from "@heroui/react"
 

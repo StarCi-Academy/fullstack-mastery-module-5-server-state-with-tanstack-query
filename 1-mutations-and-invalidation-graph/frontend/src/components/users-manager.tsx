@@ -1,4 +1,3 @@
-"use client"
 import { Avatar, Button, Card, Chip, Input, Label, Skeleton, TextField } from "@heroui/react"
 import { useFormik } from "formik"
 
