@@ -1,8 +1,7 @@
 import { test, expect } from "@playwright/test"
 
 /**
- * Luồng 3 — Hai lần edit tuần tự: lần ghi sau cùng thắng sau khi server xác nhận.
- * (EN: Flow 3 — Two sequential edits: the last write wins after server confirmation.)
+ * Flow 3 — Two sequential edits: the last write wins after server confirmation.
  */
 test("flow 3 — sequential edits collapse to last-write-wins", async ({ page }) => {
     await page.goto("/")

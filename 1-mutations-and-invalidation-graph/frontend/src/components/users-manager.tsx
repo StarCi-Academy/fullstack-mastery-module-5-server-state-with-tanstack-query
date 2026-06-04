@@ -6,11 +6,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { createUser, deleteUser, fetchUsers, type User } from "../lib/api"
 
 /**
- * UsersManager — list + add form (Formik + HeroUI) + delete button với polish.
- * (EN: UsersManager — list + add form [Formik + HeroUI] + delete button with polish.)
+ * UsersManager — list + add form (Formik + HeroUI) + delete button with polish.
  *
- * `useMutation` gọi `invalidateQueries(["users"])` trong `onSuccess` để cập nhật danh sách.
- * (EN: `useMutation` calls `invalidateQueries(["users"])` in `onSuccess` to refresh the list.)
+ * `useMutation` calls `invalidateQueries(["users"])` in `onSuccess` to refresh the list.
  */
 export function UsersManager(): JSX.Element {
     const qc = useQueryClient()
@@ -27,8 +25,7 @@ export function UsersManager(): JSX.Element {
     })
 
     /**
-     * Formik xử lý state form + validate + reset.
-     * (EN: Formik manages form state, validation, and reset.)
+     * Formik manages form state, validation, and reset.
      */
     const formik = useFormik<{ name: string; email: string }>({
         initialValues: { name: "", email: "" },

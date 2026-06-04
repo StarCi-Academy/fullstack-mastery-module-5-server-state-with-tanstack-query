@@ -13,8 +13,7 @@ import { CreateUserDto } from "./dto"
 import { UsersService, type User } from "./users.service"
 
 /**
- * UsersController — REST CRUD tối thiểu cho FE TanStack mutations.
- * (EN: UsersController — minimal REST CRUD for the TanStack mutations FE.)
+ * UsersController — minimal REST CRUD for the TanStack mutations FE.
  */
 @Controller("users")
 export class UsersController {
@@ -22,7 +21,7 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     /**
-     * Liệt kê users (EN: List users).
+     * List users.
      */
     @Get()
     list(): User[] {
@@ -31,7 +30,7 @@ export class UsersController {
     }
 
     /**
-     * Tạo user (EN: Create user).
+     * Create user.
      */
     @Post()
     create(@Body() dto: CreateUserDto): User {
@@ -40,7 +39,7 @@ export class UsersController {
     }
 
     /**
-     * Xoá user (EN: Delete user).
+     * Delete user.
      */
     @Delete(":id")
     @HttpCode(204)

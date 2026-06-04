@@ -1,12 +1,12 @@
 /**
- * Kiểu User (EN: User type).
+ * User type.
  */
 export type User = { id: number; name: string; email: string }
 
 const BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:3000"
 
 /**
- * Lấy danh sách users (EN: Fetch user list).
+ * Fetch user list.
  */
 export async function fetchUsers(): Promise<User[]> {
     const res = await fetch(`${BASE}/users`, { cache: "no-store" })
@@ -15,8 +15,7 @@ export async function fetchUsers(): Promise<User[]> {
 }
 
 /**
- * Patch user; nếu `fail` thì gắn `?fail=true` để server trả 500.
- * (EN: Patch user; if `fail`, append `?fail=true` so the server returns 500.)
+ * Patch user; if `fail`, append `?fail=true` so the server returns 500.
  */
 export async function patchUser(args: {
     id: number

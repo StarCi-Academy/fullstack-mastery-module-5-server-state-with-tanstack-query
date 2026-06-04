@@ -18,13 +18,10 @@ import { fetchUsers, patchUser, type User } from "../lib/api"
 const USERS_KEY = ["users"] as const
 
 /**
- * OptimisticEditor — minh hoạ optimistic update + rollback khi server lỗi.
- * (EN: OptimisticEditor — illustrates optimistic update + rollback on server error.)
+ * OptimisticEditor — illustrates optimistic update + rollback on server error.
  *
- * Pattern: onMutate cancel queries, snapshot previous, setQueryData lạc quan,
- * onError rollback bằng setQueryData(previous), onSettled invalidate.
- * (EN: Pattern: onMutate cancels queries, snapshots previous, setQueryData optimistically,
- * onError rolls back via setQueryData(previous), onSettled invalidates.)
+ * Pattern: onMutate cancels queries, snapshots previous, setQueryData optimistically,
+ * onError rolls back via setQueryData(previous), onSettled invalidates.
  */
 export function OptimisticEditor(): JSX.Element {
     const qc = useQueryClient()
@@ -35,18 +32,18 @@ export function OptimisticEditor(): JSX.Element {
     const mutation = useMutation({
         mutationFn: patchUser,
         onMutate: async (vars): Promise<{ previous: User[] | undefined }> => {
-            // Bước 1: huỷ refetch để không ghi đè optimistic (EN: cancel in-flight refetches)
+            // Step 1: cancel in-flight refetches to prevent overwriting the optimistic state
             await qc.cancelQueries({ queryKey: USERS_KEY })
-            // Bước 2: snapshot dữ liệu cũ (EN: snapshot current cache)
+            // Step 2: snapshot current cache
             const previous = qc.getQueryData<User[]>(USERS_KEY)
-            // Bước 3: optimistic write (EN: optimistic write)
+            // Step 3: optimistic write
             qc.setQueryData<User[]>(USERS_KEY, (old) =>
                 (old ?? []).map((u) => (u.id === vars.id ? { ...u, name: vars.name } : u)),
             )
             return { previous }
         },
         onError: (_err, _vars, ctx): void => {
-            // Rollback (EN: Rollback to snapshot)
+            // Rollback to snapshot
             if (ctx?.previous) {
                 qc.setQueryData(USERS_KEY, ctx.previous)
             }

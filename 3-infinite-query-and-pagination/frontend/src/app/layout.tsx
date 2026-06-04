@@ -4,7 +4,7 @@ import "./globals.css"
 import { HeroUIProvider } from "@/components/providers"
 
 /**
- * Root layout (EN: Root layout) — bọc QueryProvider.
+ * Root layout — wraps QueryProvider.
  */
 export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
     return (

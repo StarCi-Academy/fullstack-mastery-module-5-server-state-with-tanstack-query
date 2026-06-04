@@ -5,21 +5,17 @@ import { Avatar, Card, Chip, Skeleton } from "@heroui/react"
 import { fetchUsers, type User } from "../lib/api"
 
 /**
- * UsersPanel — hiển thị danh sách user qua useQuery với HeroUI polish.
- * (EN: UsersPanel — renders the user list via useQuery with HeroUI polish.)
+ * UsersPanel — renders the user list via useQuery with HeroUI polish.
  *
- * Quan sát các trạng thái: isPending (Skeleton lần đầu), isFetching (Chip refresh ngầm),
- * và `dataUpdatedAt` (timestamp lần fetch cuối) để học vòng đời cache.
- * (EN: Observe isPending [Skeleton initial], isFetching [refresh Chip background],
- * and dataUpdatedAt [last fetch timestamp] to learn the cache lifecycle.)
+ * Observe isPending (Skeleton initial), isFetching (refresh Chip background),
+ * and dataUpdatedAt (last fetch timestamp) to learn the cache lifecycle.
  */
 export function UsersPanel(): JSX.Element {
     const query = useQuery<User[]>({
         queryKey: ["users"],
         queryFn: fetchUsers,
-        // refetchOnWindowFocus: 'always' để luồng 3 luôn demo được refetch khi focus,
-        // bất kể staleTime. (EN: 'always' ensures flow 3 demonstrates window-focus refetch
-        // regardless of staleTime — the cache still returns instantly while re-validating.)
+        // refetchOnWindowFocus: 'always' ensures flow 3 demonstrates window-focus refetch
+        // regardless of staleTime — the cache still returns instantly while re-validating.
         refetchOnWindowFocus: "always",
     })
 

@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common"
 
 /**
- * Kiểu User (EN: User type).
+ * User type.
  */
 export interface User {
     id: number
@@ -10,8 +10,7 @@ export interface User {
 }
 
 /**
- * Trang dữ liệu cho cursor pagination.
- * (EN: Page payload for cursor pagination.)
+ * Page payload for cursor pagination.
  */
 export interface UsersPage {
     data: User[]
@@ -19,8 +18,7 @@ export interface UsersPage {
 }
 
 /**
- * UsersService — seed 25 users để demo nhiều page.
- * (EN: UsersService — seeds 25 users to demonstrate multiple pages.)
+ * UsersService — seeds 25 users to demonstrate multiple pages.
  */
 @Injectable()
 export class UsersService {
@@ -31,8 +29,7 @@ export class UsersService {
     }))
 
     /**
-     * Trả slice từ cursor + limit; nextCursor=null khi hết.
-     * (EN: Return slice [cursor, cursor+limit); nextCursor=null when exhausted.)
+     * Return slice [cursor, cursor+limit); nextCursor=null when exhausted.
      */
     findPage(cursor: number, limit: number): UsersPage {
         const safeCursor = Math.max(0, cursor)

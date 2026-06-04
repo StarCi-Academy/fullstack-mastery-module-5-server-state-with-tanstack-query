@@ -1,15 +1,11 @@
 import Link from "next/link"
 
 /**
- * Trang chủ — link tới /users.
- * (EN: Home — links to /users.)
+ * Home — links to /users.
  *
- * Lưu ý: dùng plain `<a>` (qua next/link) thay vì HeroUI Button vì
- * `refetchOnWindowFocus: "always"` trên `useQuery` sẽ refetch khi
- * blur/focus button → vỡ Luồng 2 (chỉ-một-request invariant).
- * (EN: Note: use plain `<a>` via next/link instead of HeroUI Button.
+ * Note: use plain `<a>` via next/link instead of HeroUI Button.
  * `refetchOnWindowFocus: "always"` on useQuery refetches on button blur/focus
- * → breaks Flow 2's one-request invariant.)
+ * → breaks Flow 2's one-request invariant.
  */
 export default function Home(): JSX.Element {
     return (

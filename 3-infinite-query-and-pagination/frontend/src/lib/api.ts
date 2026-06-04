@@ -1,11 +1,10 @@
 /**
- * Kiểu User (EN: User type).
+ * User type.
  */
 export type User = { id: number; name: string; email: string }
 
 /**
- * Trang dữ liệu trả về cho cursor pagination.
- * (EN: Page payload for cursor pagination.)
+ * Page payload for cursor pagination.
  */
 export interface UsersPage {
     data: User[]
@@ -15,7 +14,7 @@ export interface UsersPage {
 const BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:3000"
 
 /**
- * Fetch một page bằng cursor + limit (EN: Fetch a single page by cursor + limit).
+ * Fetch a single page by cursor + limit.
  */
 export async function fetchUsersPage(args: {
     cursor: number

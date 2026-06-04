@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common"
 
 /**
- * Kiểu User trong bộ nhớ (EN: In-memory User type).
+ * In-memory User type.
  */
 export interface User {
     id: number
@@ -10,8 +10,7 @@ export interface User {
 }
 
 /**
- * UsersService — lưu trữ tạm in-memory, đủ để minh hoạ vòng đời cache TanStack.
- * (EN: UsersService — in-memory store, sufficient to illustrate TanStack cache lifecycle.)
+ * UsersService — in-memory store, sufficient to illustrate TanStack cache lifecycle.
  */
 @Injectable()
 export class UsersService {
@@ -22,8 +21,7 @@ export class UsersService {
     ]
 
     /**
-     * Lấy danh sách users; nếu `delayMs > 0` thì sleep để mô phỏng latency.
-     * (EN: Return user list; if delayMs > 0, sleep to simulate latency.)
+     * Return user list; if delayMs > 0, sleep to simulate latency.
      */
     async findAll(delayMs: number): Promise<User[]> {
         if (delayMs > 0) {

@@ -5,8 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { useState, type ReactNode } from "react"
 
 /**
- * QueryProvider mặc định cho L2 — không retry để rollback xảy ra nhanh.
- * (EN: Default QueryProvider for L2 — no retries so rollback happens promptly.)
+ * Default QueryProvider for L2 — no retries so rollback happens promptly.
  */
 export function QueryProvider({ children }: { children: ReactNode }): JSX.Element {
     const [client] = useState<QueryClient>(

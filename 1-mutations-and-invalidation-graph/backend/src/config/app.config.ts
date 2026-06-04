@@ -1,8 +1,7 @@
 import { registerAs } from "@nestjs/config"
 
 /**
- * Type-safe config cho app server (port + CORS origin).
- * (EN: Type-safe config for the app server [port + CORS origin].)
+ * Type-safe config for the app server (port + CORS origin).
  */
 export interface AppConfig {
     port: number

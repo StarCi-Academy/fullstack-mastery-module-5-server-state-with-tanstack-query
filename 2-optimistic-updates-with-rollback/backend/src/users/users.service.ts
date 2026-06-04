@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common"
 
 /**
- * Kiểu User (EN: User type).
+ * User type.
  */
 export interface User {
     id: number
@@ -11,7 +11,6 @@ export interface User {
 
 /**
  * UsersService — list + patch.
- * (EN: UsersService — list + patch.)
  */
 @Injectable()
 export class UsersService {
@@ -21,15 +20,14 @@ export class UsersService {
     ]
 
     /**
-     * Trả về snapshot users (EN: Return a snapshot of users).
+     * Return a snapshot of users.
      */
     findAll(): User[] {
         return [...this.users]
     }
 
     /**
-     * Cập nhật user theo id; 404 nếu không tồn tại.
-     * (EN: Patch user by id; 404 when missing.)
+     * Patch user by id; 404 when missing.
      */
     patch(id: number, change: { name?: string }): User {
         const idx = this.users.findIndex((u) => u.id === id)

@@ -5,11 +5,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { useState, type ReactNode } from "react"
 
 /**
- * Provider bọc QueryClient — staleTime=30s, gcTime=5 phút.
- * (EN: Provider wrapping QueryClient — staleTime=30s, gcTime=5min.)
+ * Provider wrapping QueryClient — staleTime=30s, gcTime=5min.
  *
- * Dùng useState để tránh strict-mode double-render tạo hai client.
- * (EN: useState avoids strict-mode double-render creating two clients.)
+ * useState avoids strict-mode double-render creating two clients.
  */
 export function QueryProvider({ children }: { children: ReactNode }): JSX.Element {
     const [client] = useState<QueryClient>(

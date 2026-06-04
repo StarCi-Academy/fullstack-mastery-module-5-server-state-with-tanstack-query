@@ -1,14 +1,10 @@
 import { defineConfig, devices } from "@playwright/test"
 
 /**
- * Cấu hình Playwright — testDir trỏ tới ./scripts.
- * Port + base URL đọc qua env (BACKEND_PORT / FRONTEND_PORT / FRONTEND_ORIGIN) để hỗ trợ
- * parallel-audit port range; default 3000/3001 cho session đơn lẻ.
- * Spec mutate shared NestJS in-memory state → workers: 1 + fullyParallel: false để tránh race.
- * (EN: Playwright config — testDir ./scripts. Ports + base URL read from env
- * [BACKEND_PORT / FRONTEND_PORT / FRONTEND_ORIGIN] to support parallel-audit port ranges;
- * default 3000/3001 for a single session. Specs mutate shared NestJS in-memory state →
- * workers: 1 + fullyParallel: false to avoid races.)
+ * Playwright config — testDir points to ./scripts.
+ * Ports + base URL read from env (BACKEND_PORT / FRONTEND_PORT / FRONTEND_ORIGIN) to support
+ * parallel-audit port ranges; default 3000/3001 for a single session.
+ * Specs mutate shared NestJS in-memory state → workers: 1 + fullyParallel: false to avoid races.
  */
 const backendPort = parseInt(process.env.BACKEND_PORT ?? "3000", 10)
 const frontendPort = parseInt(process.env.FRONTEND_PORT ?? "3001", 10)

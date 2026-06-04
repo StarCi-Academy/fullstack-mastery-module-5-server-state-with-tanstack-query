@@ -1,7 +1,7 @@
 import { IsOptional, IsString, MinLength } from "class-validator"
 
 /**
- * DTO update user (EN: User update DTO).
+ * User update DTO.
  */
 export class UpdateUserDto {
     @IsOptional()

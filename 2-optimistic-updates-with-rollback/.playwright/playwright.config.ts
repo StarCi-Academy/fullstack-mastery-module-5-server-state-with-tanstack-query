@@ -1,15 +1,13 @@
 import { defineConfig, devices } from "@playwright/test"
 
 /**
- * Cấu hình Playwright — testDir trỏ tới ./scripts.
- * webServer khởi động NestJS (3000) và Next.js (3001) nếu chưa chạy.
- * (EN: Playwright config — testDir ./scripts. webServer starts NestJS [3000] and Next.js [3001] if not already running.)
+ * Playwright config — testDir points to ./scripts.
+ * webServer starts NestJS (3000) and Next.js (3001) if not already running.
  */
 export default defineConfig({
     testDir: "./scripts",
     timeout: 30_000,
-    // Tests mutate shared NestJS in-memory state → ép chạy serial để tránh race.
-    // (EN: tests mutate shared NestJS in-memory state → force serial to avoid race.)
+    // Tests mutate shared NestJS in-memory state → force serial to avoid race.
     workers: 1,
     fullyParallel: false,
     use: {

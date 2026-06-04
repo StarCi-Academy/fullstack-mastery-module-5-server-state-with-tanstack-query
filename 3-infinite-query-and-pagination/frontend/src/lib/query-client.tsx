@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { useState, type ReactNode } from "react"
 
 /**
- * QueryProvider cho infinite query (EN: QueryProvider for infinite query).
+ * QueryProvider for infinite query.
  */
 export function QueryProvider({ children }: { children: ReactNode }): JSX.Element {
     const [client] = useState<QueryClient>(

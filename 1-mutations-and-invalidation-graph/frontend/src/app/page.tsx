@@ -1,7 +1,7 @@
 import { UsersManager } from "../components/users-manager"
 
 /**
- * Trang chính — render UsersManager (EN: Main page — renders UsersManager).
+ * Main page — renders UsersManager.
  */
 export default function Home(): JSX.Element {
     return (

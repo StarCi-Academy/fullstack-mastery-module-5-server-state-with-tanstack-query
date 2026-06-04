@@ -5,8 +5,7 @@ import { AppModule } from "./app.module"
 import type { AppConfig } from "./config"
 
 /**
- * Bootstrap NestJS — port + CORS origin đọc từ ConfigService (env-driven).
- * (EN: Bootstrap NestJS — port + CORS origin sourced from ConfigService [env-driven].)
+ * Bootstrap NestJS — port + CORS origin sourced from ConfigService (env-driven).
  */
 async function bootstrap(): Promise<void> {
     const app = await NestFactory.create(AppModule)

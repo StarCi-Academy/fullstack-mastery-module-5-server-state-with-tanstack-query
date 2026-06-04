@@ -13,8 +13,7 @@ import { UpdateUserDto } from "./dto"
 import { UsersService, type User } from "./users.service"
 
 /**
- * UsersController — hỗ trợ optional `?fail=true` trên PATCH để minh hoạ rollback.
- * (EN: UsersController — supports optional `?fail=true` on PATCH to demonstrate rollback.)
+ * UsersController — supports optional `?fail=true` on PATCH to demonstrate rollback.
  */
 @Controller("users")
 export class UsersController {
@@ -22,7 +21,7 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     /**
-     * Liệt kê users (EN: List users).
+     * List users.
      */
     @Get()
     list(): User[] {
@@ -31,8 +30,7 @@ export class UsersController {
     }
 
     /**
-     * PATCH /users/:id — nếu `fail=true` thì throw 500 cho rollback.
-     * (EN: PATCH /users/:id — throws 500 when `fail=true` to trigger rollback.)
+     * PATCH /users/:id — throws 500 when `fail=true` to trigger rollback.
      */
     @Patch(":id")
     patch(

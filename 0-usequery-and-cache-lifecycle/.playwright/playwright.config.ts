@@ -1,9 +1,8 @@
 import { defineConfig, devices } from "@playwright/test"
 
 /**
- * Cấu hình Playwright — testDir trỏ tới ./scripts (cùng folder .playwright/).
- * webServer khởi động NestJS (3000) và Next.js (3001) nếu chưa chạy.
- * (EN: Playwright config — testDir ./scripts. webServer starts NestJS [3000] and Next.js [3001] if not already running.)
+ * Playwright config — testDir points to ./scripts (in the same .playwright/ directory).
+ * webServer starts NestJS (3000) and Next.js (3001) if not already running.
  */
 export default defineConfig({
     testDir: "./scripts",

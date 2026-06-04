@@ -2,13 +2,10 @@ import Link from "next/link"
 import { UsersPanel } from "../../components/users-panel"
 
 /**
- * Trang Users — render UsersPanel với header polished.
- * (EN: Users page rendering UsersPanel with polished header.)
+ * Users page rendering UsersPanel with polished header.
  *
- * Header link dùng plain `<a>` (next/link) thay vì HeroUI Button vì
- * `refetchOnWindowFocus: "always"` sẽ refetch khi button blur/focus.
- * (EN: Header link uses plain `<a>` (next/link) instead of HeroUI Button
- * because `refetchOnWindowFocus: "always"` refetches on button blur/focus.)
+ * Header link uses plain `<a>` (next/link) instead of HeroUI Button
+ * because `refetchOnWindowFocus: "always"` refetches on button blur/focus.
  */
 export default function UsersPage(): JSX.Element {
     return (

@@ -7,11 +7,9 @@ import { fetchUsersPage, type UsersPage } from "../lib/api"
 const PAGE_SIZE = 10
 
 /**
- * UsersFeed — minh hoạ useInfiniteQuery với cursor pagination + HeroUI polish.
- * (EN: UsersFeed — illustrates useInfiniteQuery with cursor pagination + HeroUI polish.)
+ * UsersFeed — illustrates useInfiniteQuery with cursor pagination + HeroUI polish.
  *
- * `getNextPageParam` rút `nextCursor` từ page cuối; nếu null thì hasNextPage=false.
- * (EN: `getNextPageParam` reads `nextCursor` from the last page; null means hasNextPage=false.)
+ * `getNextPageParam` reads `nextCursor` from the last page; null means hasNextPage=false.
  */
 export function UsersFeed(): JSX.Element {
     const query = useInfiniteQuery<UsersPage, Error>({

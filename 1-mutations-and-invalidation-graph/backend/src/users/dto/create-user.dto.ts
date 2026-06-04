@@ -1,7 +1,7 @@
 import { IsEmail, IsString, MinLength } from "class-validator"
 
 /**
- * DTO tạo user mới (EN: DTO for creating a new user).
+ * DTO for creating a new user.
  */
 export class CreateUserDto {
     @IsString()

@@ -3,7 +3,6 @@ import { UsersService, type UsersPage } from "./users.service"
 
 /**
  * UsersController — GET /users?cursor=N&limit=M.
- * (EN: UsersController — GET /users?cursor=N&limit=M.)
  */
 @Controller("users")
 export class UsersController {
@@ -11,7 +10,7 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     /**
-     * Trả page theo cursor (EN: Return cursor-bounded page).
+     * Return cursor-bounded page.
      */
     @Get()
     page(@Query("cursor") cursor?: string, @Query("limit") limit?: string): UsersPage {

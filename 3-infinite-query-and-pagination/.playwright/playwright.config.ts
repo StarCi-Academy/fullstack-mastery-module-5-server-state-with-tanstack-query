@@ -1,10 +1,9 @@
 import { defineConfig, devices } from "@playwright/test"
 
 /**
- * Cấu hình Playwright — testDir trỏ tới ./scripts.
- * webServer khởi động NestJS (3000) và Next.js (3001). Lesson read-only nên giữ parallel.
- * (EN: Playwright config — testDir ./scripts. webServer starts NestJS [3000] and Next.js [3001].
- * Lesson is read-only — parallel execution is fine.)
+ * Playwright config — testDir points to ./scripts.
+ * webServer starts NestJS (3000) and Next.js (3001).
+ * Lesson is read-only — parallel execution is fine.
  */
 export default defineConfig({
     testDir: "./scripts",

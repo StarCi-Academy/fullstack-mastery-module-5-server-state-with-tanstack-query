@@ -1,7 +1,7 @@
 import { UsersFeed } from "../components/users-feed"
 
 /**
- * Trang chính — render UsersFeed (EN: Main page — renders UsersFeed).
+ * Main page — renders UsersFeed.
  */
 export default function Home(): JSX.Element {
     return (

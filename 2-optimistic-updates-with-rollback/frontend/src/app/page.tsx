@@ -1,7 +1,7 @@
 import { OptimisticEditor } from "../components/optimistic-editor"
 
 /**
- * Trang chính (EN: Main page) — render OptimisticEditor.
+ * Main page — renders OptimisticEditor.
  */
 export default function Home(): JSX.Element {
     return (

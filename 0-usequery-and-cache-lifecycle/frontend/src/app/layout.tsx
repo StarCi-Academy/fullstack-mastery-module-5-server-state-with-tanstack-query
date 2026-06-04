@@ -4,8 +4,7 @@ import "./globals.css"
 import { HeroUIProvider } from "@/components/providers"
 
 /**
- * Root layout — bọc toàn cây bằng QueryProvider để mọi page chia sẻ QueryClient.
- * (EN: Root layout wrapping the tree with QueryProvider so all pages share one QueryClient.)
+ * Root layout wrapping the tree with QueryProvider so all pages share one QueryClient.
  */
 export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
     return (

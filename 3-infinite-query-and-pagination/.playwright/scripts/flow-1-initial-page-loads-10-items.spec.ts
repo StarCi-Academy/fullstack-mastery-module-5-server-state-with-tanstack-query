@@ -1,8 +1,7 @@
 import { test, expect } from "@playwright/test"
 
 /**
- * Luồng 1 — Page đầu tải 10 items.
- * (EN: Flow 1 — Initial page loads 10 items.)
+ * Flow 1 — Initial page loads 10 items.
  */
 test("flow 1 — initial page renders 10 items and hasNextPage=true", async ({ page }) => {
     await page.goto("/")
