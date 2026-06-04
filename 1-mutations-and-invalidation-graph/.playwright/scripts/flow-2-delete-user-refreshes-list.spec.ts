@@ -13,9 +13,9 @@ test("flow 2 — deleting a user removes the row after invalidation", async ({ p
     const row = page.getByText(email)
     await expect(row).toBeVisible()
 
-    // Step 2: locate the delete button
-    const li = page.locator("li", { hasText: email })
-    const deleteBtn = li.locator('[data-testid^="delete-"]')
+    // Step 2: locate the delete button (HeroUI ListBox.Item renders a div, not <li>)
+    const row = page.locator('[data-testid^="user-"]', { hasText: email })
+    const deleteBtn = row.locator('[data-testid^="delete-"]')
     await deleteBtn.click()
 
     // Step 3: assert row is hidden
