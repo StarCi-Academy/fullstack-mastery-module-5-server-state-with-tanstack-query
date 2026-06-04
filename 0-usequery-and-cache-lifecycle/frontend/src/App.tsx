@@ -9,8 +9,10 @@ export default function App(): JSX.Element {
     return (
         <HeroUIProvider>
             <QueryProvider>
-                <main className="mx-auto max-w-2xl p-6">
-                    <UsersPanel />
+                <main className="min-h-screen bg-background p-6">
+                    <div className="mx-auto max-w-2xl">
+                        <UsersPanel />
+                    </div>
                 </main>
             </QueryProvider>
         </HeroUIProvider>
