@@ -1,7 +1,15 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query"
-import { Avatar, Button, Card, Chip, Skeleton } from "@heroui/react"
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+    Button,
+    Card,
+    Chip,
+    Skeleton,
+} from "@heroui/react"
 import { motion } from "framer-motion"
 import {
     ArrowsClockwise,
@@ -15,8 +23,12 @@ import { fetchUsers, type User } from "../lib/api"
 const avatarUrl = (email: string) =>
     `https://i.pravatar.cc/120?u=${encodeURIComponent(email)}`
 
+/** Two-letter initials fallback from a name. */
+const initials = (name: string) =>
+    name.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase()
+
 /**
- * UsersPanel — renders the user list via useQuery with HeroUI polish.
+ * UsersPanel — renders the user list via useQuery with HeroUI v3 polish.
  *
  * Observe isPending (Skeleton initial), isFetching (refresh Chip + timestamp),
  * and dataUpdatedAt (last fetch time) to learn the cache lifecycle.
@@ -57,14 +69,14 @@ export function UsersPanel(): JSX.Element {
                     <div className="flex items-center gap-2.5">
                         <h2 className="text-base font-semibold text-foreground">Users</h2>
                         {!query.isPending && !query.isError && (
-                            <Chip size="sm" variant="flat" color="default">
+                            <Chip size="sm" variant="soft" color="default">
                                 {query.data.length}
                             </Chip>
                         )}
                         <Chip
-                            color={query.isFetching ? "warning" : "success"}
-                            variant="dot"
                             size="sm"
+                            variant="soft"
+                            color={query.isFetching ? "warning" : "success"}
                             data-testid="users-fetching"
                         >
                             {query.isFetching ? "refreshing" : "idle"}
@@ -82,12 +94,11 @@ export function UsersPanel(): JSX.Element {
                         </span>
                         <Button
                             size="sm"
-                            variant="flat"
-                            color="primary"
-                            isLoading={query.isFetching}
-                            startContent={<ArrowsClockwise size={15} weight="bold" />}
+                            variant="secondary"
+                            isPending={query.isFetching}
                             onPress={() => { void query.refetch() }}
                         >
+                            <ArrowsClockwise size={15} weight="bold" />
                             Refresh
                         </Button>
                     </div>
@@ -134,12 +145,10 @@ export function UsersPanel(): JSX.Element {
                                 className="grid grid-cols-[1.2fr_1fr] items-center gap-3 border-t border-default-100 px-5 py-3.5 transition-colors hover:bg-default-50"
                             >
                                 <div className="flex min-w-0 items-center gap-3">
-                                    <Avatar
-                                        src={avatarUrl(user.email)}
-                                        name={user.name}
-                                        size="sm"
-                                        className="shrink-0 ring-2 ring-default-100"
-                                    />
+                                    <Avatar size="sm" className="shrink-0">
+                                        <AvatarImage src={avatarUrl(user.email)} alt={user.name} />
+                                        <AvatarFallback>{initials(user.name)}</AvatarFallback>
+                                    </Avatar>
                                     <span className="truncate font-medium text-foreground">
                                         {user.name}
                                     </span>
