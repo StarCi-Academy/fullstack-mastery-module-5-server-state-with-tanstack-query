@@ -34,7 +34,7 @@ export function NameEditor({
             <Checkbox
                 data-testid="cb-fail"
                 isSelected={shouldFail}
-                onValueChange={onShouldFailChange}
+                onChange={onShouldFailChange}
             >
                 <Checkbox.Control>
                     <Checkbox.Indicator />

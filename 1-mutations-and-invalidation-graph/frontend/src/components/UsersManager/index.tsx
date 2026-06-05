@@ -8,10 +8,12 @@ import { AddUserForm } from "./AddUserForm"
 import { UserList } from "./UserList"
 
 /**
- * UsersManager — useQuery + useMutation(create/delete) + invalidateQueries.
+ * UsersManager — the shared lesson content used by both Local and Sandbox.
  *
- * Each mutation calls invalidateQueries on success so the list re-fetches
- * automatically — no manual setState needed.
+ * useQuery + useMutation(create/delete) + invalidateQueries. Each mutation calls
+ * invalidateQueries on success so the list re-fetches automatically — no manual
+ * setState needed. The title/description are owned by App, so this body has no
+ * heading of its own.
  */
 export function UsersManager(): JSX.Element {
     const qc = useQueryClient()
@@ -36,17 +38,6 @@ export function UsersManager(): JSX.Element {
 
     return (
         <div className="flex flex-col">
-            <div className="text-base font-semibold text-foreground">
-                Mutations &amp; Invalidation Graph
-            </div>
-            <div className="h-3" />
-            <div className="text-sm text-muted">
-                Each mutation calls <code>invalidateQueries</code> after success — TanStack
-                Query re-fetches automatically, keeping the list in sync with the server.
-            </div>
-
-            <div className="h-6" />
-
             <AddUserForm
                 name={name}
                 email={email}

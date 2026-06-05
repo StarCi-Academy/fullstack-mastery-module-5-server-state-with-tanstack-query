@@ -1,0 +1,12 @@
+import { UsersFeed } from "../UsersFeed"
+
+/**
+ * Sandbox — the `?sandbox=1` content for the embedded preview.
+ *
+ * This lesson is single-client (no second user to show), so the sandbox renders
+ * the same single client as Local — no multi-pane tabs. The split is kept for a
+ * uniform `?sandbox` switch across the whole course.
+ */
+export function Sandbox(): JSX.Element {
+    return <UsersFeed />
+}

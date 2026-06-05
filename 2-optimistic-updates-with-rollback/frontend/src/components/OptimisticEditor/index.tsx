@@ -10,10 +10,12 @@ import { NameEditor } from "./NameEditor"
 const USERS_KEY = ["users"] as const
 
 /**
- * OptimisticEditor — optimistic update + rollback on server error.
+ * OptimisticEditor — the shared lesson content used by both Local and Sandbox.
  *
- * Flow: onMutate cancels queries, snapshots previous cache, writes optimistically;
- * onError restores snapshot; onSettled invalidates to re-sync with server.
+ * Optimistic update + rollback on server error. Flow: onMutate cancels queries,
+ * snapshots previous cache, writes optimistically; onError restores snapshot;
+ * onSettled invalidates to re-sync with server. The title/description are owned
+ * by App, so this body has no heading of its own.
  */
 export function OptimisticEditor(): JSX.Element {
     const qc = useQueryClient()
@@ -71,18 +73,6 @@ export function OptimisticEditor(): JSX.Element {
 
     return (
         <div className="flex flex-col">
-            <div className="text-base font-semibold text-foreground">
-                Optimistic Updates &amp; Rollback
-            </div>
-            <div className="h-3" />
-            <div className="text-sm text-muted">
-                The UI updates instantly before the server responds. If the server
-                returns an error, the cache rolls back to the snapshot taken in{" "}
-                <code>onMutate</code>.
-            </div>
-
-            <div className="h-6" />
-
             <UserName user={first} />
 
             <div className="h-3" />

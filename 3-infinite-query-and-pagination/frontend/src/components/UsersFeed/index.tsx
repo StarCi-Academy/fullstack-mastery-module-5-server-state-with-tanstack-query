@@ -33,8 +33,9 @@ function SkeletonRows({ testId }: { testId?: string }): JSX.Element {
  * All pages accumulate in query.data.pages so the list never resets. The list
  * lives in a fixed-height scroll box; an IntersectionObserver watches a sentinel
  * at the bottom (root = that box) and fetches the next page as it scrolls into
- * view — there is no Load more button. The title/description always render; the
- * list shows a skeleton on the initial load and while the next page is loading.
+ * view — there is no Load more button. The list shows a skeleton on the initial
+ * load and while the next page is loading. This is the shared lesson content
+ * used by both Local and Sandbox; the title/description are owned by App.
  */
 export function UsersFeed(): JSX.Element {
     const query = useInfiniteQuery<UsersPage, Error>({
@@ -73,20 +74,6 @@ export function UsersFeed(): JSX.Element {
 
     return (
         <div className="flex flex-col">
-            {/* Header always renders — never skeletoned, it has no data dependency. */}
-            <div className="text-base font-semibold text-foreground">
-                Infinite Query &amp; Cursor Pagination
-            </div>
-            <div className="h-3" />
-            <div className="text-sm text-muted">
-                <code>useInfiniteQuery</code> accumulates pages under one cache key.{" "}
-                <code>getNextPageParam</code> derives the next cursor from the last page;
-                when it returns <code>null</code>, <code>hasNextPage</code> becomes{" "}
-                <code>false</code>. Scroll the list to auto-load more.
-            </div>
-
-            <div className="h-6" />
-
             {query.isError ? (
                 <p
                     className="py-6 text-center text-sm font-medium text-danger"

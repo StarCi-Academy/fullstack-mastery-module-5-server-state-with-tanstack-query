@@ -10,7 +10,7 @@ import {
     Skeleton,
     Spinner,
 } from "@heroui/react"
-import { fetchUsers, type User } from "../lib/api"
+import { fetchUsers, type User } from "../../lib/api"
 
 /** Deterministic avatar photo per user (seeded by email). */
 const avatarUrl = (email: string) =>
@@ -21,12 +21,13 @@ const initials = (name: string) =>
     name.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase()
 
 /**
- * UsersPanel — renders the user list via useQuery.
+ * UsersClient — the shared lesson content used by both Local and Sandbox.
  *
- * Observe isPending (Skeleton initial) and isFetching (spinner on the refresh
- * button) to learn the cache lifecycle.
+ * Renders the user list via useQuery. Observe isPending (Skeleton initial) and
+ * isFetching (spinner on the refresh button) to learn the cache lifecycle. The
+ * title/description are owned by App, so this body has no heading of its own.
  */
-export function UsersPanel(): JSX.Element {
+export function UsersClient(): JSX.Element {
     const query = useQuery<User[]>({
         queryKey: ["users"],
         queryFn: fetchUsers,
@@ -37,18 +38,6 @@ export function UsersPanel(): JSX.Element {
 
     return (
         <div className="flex flex-col">
-            {/* lesson intro */}
-            <div className="text-base font-semibold text-foreground">
-                useQuery &amp; Cache Lifecycle
-            </div>
-            <div className="h-3" />
-            <div className="text-sm text-muted">
-                A single useQuery subscribes to the cache — it renders instantly from
-                cache and re-validates in the background on window focus.
-            </div>
-
-            <div className="h-6" />
-
             {/* refresh action */}
             <div className="flex justify-start">
                 <Button
