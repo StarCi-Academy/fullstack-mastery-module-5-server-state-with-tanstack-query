@@ -45,7 +45,7 @@ export function UsersManager(): JSX.Element {
                 Query re-fetches automatically, keeping the list in sync with the server.
             </div>
 
-            <div className="h-3" />
+            <div className="h-6" />
 
             <AddUserForm
                 name={name}
