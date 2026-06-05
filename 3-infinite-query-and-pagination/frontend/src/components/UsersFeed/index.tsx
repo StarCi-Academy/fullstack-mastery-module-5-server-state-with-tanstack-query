@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { useInfiniteQuery } from "@tanstack/react-query"
-import { Skeleton } from "@heroui/react"
+import { Skeleton, ScrollShadow } from "@heroui/react"
 import { fetchUsersPage, type UsersPage } from "../../lib/api"
 import { UserList } from "./UserList"
 import { FeedStatus } from "./FeedStatus"
@@ -91,11 +91,15 @@ export function UsersFeed(): JSX.Element {
                     <div className="h-3" />
 
                     {/* Fixed-height scroll box: the list overflows so the sentinel
-                        sits below the fold until the learner scrolls down. */}
-                    <div
+                        sits below the fold until the learner scrolls down. A
+                        HeroUI ScrollShadow fades the top/bottom edges to signal
+                        more content instead of a hard border. It owns the
+                        overflow + forwards the ref to the real scroll node, so
+                        the IntersectionObserver still uses it as its root. */}
+                    <ScrollShadow
                         ref={scrollRef}
                         data-testid="users-scroll"
-                        className="max-h-96 overflow-y-auto rounded-2xl border border-default-200 p-1"
+                        className="max-h-96 rounded-2xl p-1"
                     >
                         <UserList users={all} />
 
@@ -106,7 +110,7 @@ export function UsersFeed(): JSX.Element {
 
                         {/* Sentinel observed for infinite scroll. */}
                         <div ref={sentinelRef} aria-hidden className="h-px w-full" />
-                    </div>
+                    </ScrollShadow>
                 </>
             )}
         </div>
