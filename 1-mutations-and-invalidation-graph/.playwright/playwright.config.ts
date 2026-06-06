@@ -38,7 +38,7 @@ export default defineConfig({
             port: frontendPort,
             env: {
                 PORT: String(frontendPort),
-                NEXT_PUBLIC_API_BASE: `http://localhost:${backendPort}`,
+                VITE_API_BASE: `http://localhost:${backendPort}`,
             },
             reuseExistingServer: !process.env.CI,
             timeout: 120_000,
