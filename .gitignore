@@ -18,3 +18,11 @@ test-results/
 .vscode/
 .idea/
 *.log
+target/
+bin/
+obj/
+.gradle/
+vendor/
+*.exe
+go-out.txt
+go-err.txt
