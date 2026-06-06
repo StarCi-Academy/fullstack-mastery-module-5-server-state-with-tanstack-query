@@ -8,7 +8,7 @@ import { test, expect } from "@playwright/test"
 test("flow 2 — re-mount within staleTime hits cache (one network call)", async ({ page }) => {
     let usersCalls = 0
     page.on("request", (req) => {
-        // Count only NestJS API calls, ignoring Next.js page navigation and RSC prefetch.
+        // Count only NestJS API calls; ignore non-API browser navigation (Vite HMR, etc.).
         if (req.url().startsWith("http://localhost:3000/users") && req.method() === "GET") {
             usersCalls += 1
         }
