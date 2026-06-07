@@ -2,6 +2,7 @@ import { HeroUIProvider } from "./components/providers"
 import { QueryProvider } from "./lib/query-client"
 import { Local } from "./components/Local"
 import { Sandbox } from "./components/Sandbox"
+import { Typography } from "@heroui/react"
 
 /** Lesson label (shown above the content in both modes). */
 const TITLE = "useQuery & Cache Lifecycle"
@@ -25,10 +26,14 @@ export default function App(): JSX.Element {
                 <main className="min-h-screen bg-background p-3">
                     <div className="mx-auto max-w-2xl">
                         {/* Label */}
-                        <div className="text-base font-semibold text-foreground">{TITLE}</div>
+                        <Typography.Heading level={4} weight="semibold">
+                            {TITLE}
+                        </Typography.Heading>
                         <div className="h-3" />
                         {/* Description */}
-                        <div className="text-sm text-muted">{DESCRIPTION}</div>
+                        <Typography.Paragraph size="sm" color="muted">
+                            {DESCRIPTION}
+                        </Typography.Paragraph>
                         <div className="h-6" />
                         {/* Content */}
                         {isSandbox ? <Sandbox /> : <Local />}

@@ -26,3 +26,4 @@ vendor/
 *.exe
 go-out.txt
 go-err.txt
+*.tsbuildinfo

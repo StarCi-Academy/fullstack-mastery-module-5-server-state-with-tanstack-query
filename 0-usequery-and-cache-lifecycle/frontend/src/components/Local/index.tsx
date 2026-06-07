@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import { Typography } from "@heroui/react"
 import { UsersClient } from "../UsersClient"
 
 /** Shared link styling (clickable, neutral). */
@@ -12,11 +13,11 @@ const LINK_CLASS =
 function Home(): JSX.Element {
     return (
         <div className="flex flex-col">
-            <p className="text-sm text-muted">
+            <Typography.Paragraph size="sm" color="muted">
                 The users query is not mounted on this page. Open the users list to
                 fetch (and cache) it, then come back here and return — the second
-                visit is served from cache within <code>staleTime</code>.
-            </p>
+                visit is served from cache within <Typography.Code>staleTime</Typography.Code>.
+            </Typography.Paragraph>
             <div className="h-3" />
             <Link to="/users" data-testid="link-users" className={LINK_CLASS}>
                 Go to users →

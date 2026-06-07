@@ -6,9 +6,11 @@ import {
     AvatarFallback,
     AvatarImage,
     Button,
+    ErrorMessage,
     ListBox,
     Skeleton,
     Spinner,
+    Typography,
 } from "@heroui/react"
 import { fetchUsers, type User } from "../../lib/api"
 
@@ -70,9 +72,11 @@ export function UsersClient(): JSX.Element {
                     ))}
                 </div>
             ) : query.isError ? (
-                <p className="py-6 text-center text-sm font-medium text-danger" data-testid="users-error">
+                <ErrorMessage
+                    data-testid="users-error"
+                >
                     Error: {(query.error as Error).message}
-                </p>
+                </ErrorMessage>
             ) : (
                 <ListBox
                     aria-label="Users"
@@ -94,12 +98,20 @@ export function UsersClient(): JSX.Element {
                                     <AvatarFallback>{initials(user.name)}</AvatarFallback>
                                 </Avatar>
                                 <div className="flex min-w-0 flex-col">
-                                    <span className="truncate text-sm font-medium text-foreground">
+                                    <Typography.Paragraph
+                                        size="sm"
+                                        weight="medium"
+                                        truncate
+                                    >
                                         {user.name}
-                                    </span>
-                                    <span className="truncate text-xs text-muted">
+                                    </Typography.Paragraph>
+                                    <Typography.Paragraph
+                                        size="xs"
+                                        color="muted"
+                                        truncate
+                                    >
                                         {user.email}
-                                    </span>
+                                    </Typography.Paragraph>
                                 </div>
                             </div>
                         </ListBox.Item>
