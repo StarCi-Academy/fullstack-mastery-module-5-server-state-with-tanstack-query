@@ -51,6 +51,15 @@ export function UsersManager(): JSX.Element {
 
             <div className="h-6" />
 
+            {/* Background refetch indicator: bound to isFetching, NOT isPending —
+                shows only when a refetch runs *after* data already exists (e.g. an
+                invalidate), so the old rows stay (stale-while-revalidate). */}
+            {query.isFetching && !query.isPending ? (
+                <span data-testid="list-refreshing" className="text-xs text-muted">
+                    Refreshing…
+                </span>
+            ) : null}
+
             {query.isPending ? (
                 <div className="flex flex-col gap-3" data-testid="users-skeleton">
                     {[0, 1, 2].map((row) => (
