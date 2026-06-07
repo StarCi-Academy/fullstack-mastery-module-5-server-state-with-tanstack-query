@@ -21,12 +21,9 @@ export class UsersService {
     ]
 
     /**
-     * Return user list; if delayMs > 0, sleep to simulate latency.
+     * Return user list snapshot.
      */
-    async findAll(delayMs: number): Promise<User[]> {
-        if (delayMs > 0) {
-            await new Promise<void>((resolve) => setTimeout(resolve, delayMs))
-        }
+    findAll(): User[] {
         return [...this.seed]
     }
 }

@@ -1,7 +1,8 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@heroui/react"
+import { Avatar, AvatarFallback, AvatarImage, Typography } from "@heroui/react"
 import type { User } from "../../../lib/api"
 
 interface UserNameProps {
+    /** User row to display (name may reflect an optimistic cache write). */
     user: User
 }
 
@@ -22,13 +23,17 @@ export function UserName({ user }: UserNameProps): JSX.Element {
                 <AvatarFallback>{initials(user.name)}</AvatarFallback>
             </Avatar>
             <div className="flex min-w-0 flex-col">
-                <span
-                    className="truncate text-sm font-medium text-foreground"
+                <Typography.Paragraph
+                    size="sm"
+                    weight="medium"
+                    truncate
                     data-testid={`user-${user.id}-name`}
                 >
                     {user.name}
-                </span>
-                <span className="truncate text-xs text-muted">{user.email}</span>
+                </Typography.Paragraph>
+                <Typography.Paragraph size="xs" color="muted" truncate>
+                    {user.email}
+                </Typography.Paragraph>
             </div>
         </div>
     )

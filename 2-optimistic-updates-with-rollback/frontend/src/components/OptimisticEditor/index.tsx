@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { Skeleton } from "@heroui/react"
+import { ErrorMessage, Skeleton, toast } from "@heroui/react"
 import { fetchUsers, patchUser, type User } from "../../lib/api"
 import { UserName } from "./UserName"
 import { NameEditor } from "./NameEditor"
@@ -34,10 +34,13 @@ export function OptimisticEditor(): JSX.Element {
             )
             return { previous }
         },
-        onError: (_err, _vars, ctx): void => {
+        onError: (err, _vars, ctx): void => {
             if (ctx?.previous) {
                 qc.setQueryData(USERS_KEY, ctx.previous)
             }
+            toast.danger("Server error", {
+                description: (err as Error).message,
+            })
         },
         onSettled: () => void qc.invalidateQueries({ queryKey: USERS_KEY }),
     })
@@ -60,12 +63,9 @@ export function OptimisticEditor(): JSX.Element {
 
     if (query.isError) {
         return (
-            <p
-                className="py-6 text-center text-sm font-medium text-danger"
-                data-testid="users-error"
-            >
+            <ErrorMessage data-testid="users-error">
                 Error: {(query.error as Error).message}
-            </p>
+            </ErrorMessage>
         )
     }
 

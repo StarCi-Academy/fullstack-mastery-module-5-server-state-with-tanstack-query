@@ -8,7 +8,9 @@ import {
     ParseIntPipe,
     Patch,
     Query,
+    UseInterceptors,
 } from "@nestjs/common"
+import { ResponseDelayInterceptor } from "../common"
 import { UpdateUserDto } from "./dto"
 import { UsersService, type User } from "./users.service"
 
@@ -16,6 +18,7 @@ import { UsersService, type User } from "./users.service"
  * UsersController — supports optional `?fail=true` on PATCH to demonstrate rollback.
  */
 @Controller("users")
+@UseInterceptors(ResponseDelayInterceptor)
 export class UsersController {
     private readonly logger = new Logger(UsersController.name)
     constructor(private readonly usersService: UsersService) {}

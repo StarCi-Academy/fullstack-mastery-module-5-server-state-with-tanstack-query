@@ -1,10 +1,12 @@
-import { Controller, Get, Logger, Query } from "@nestjs/common"
+import { Controller, Get, Logger, UseInterceptors } from "@nestjs/common"
+import { ResponseDelayInterceptor } from "../common"
 import { UsersService, type User } from "./users.service"
 
 /**
- * UsersController — GET /users with optional `?delay=N` to simulate latency.
+ * UsersController — GET /users with a fixed 1s response delay for loading UI demos.
  */
 @Controller("users")
+@UseInterceptors(ResponseDelayInterceptor)
 export class UsersController {
     private readonly logger = new Logger(UsersController.name)
 
@@ -14,9 +16,8 @@ export class UsersController {
      * Return user list; log each call so learners observe deduplication.
      */
     @Get()
-    async list(@Query("delay") delay?: string): Promise<User[]> {
-        const delayMs = delay ? Number.parseInt(delay, 10) : 0
-        this.logger.log(`GET /users (delay=${delayMs}ms)`)
-        return this.usersService.findAll(Number.isFinite(delayMs) ? delayMs : 0)
+    list(): User[] {
+        this.logger.log("GET /users")
+        return this.usersService.findAll()
     }
 }

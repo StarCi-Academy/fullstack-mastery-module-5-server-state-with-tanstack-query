@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { Skeleton } from "@heroui/react"
+import { ErrorMessage, Skeleton } from "@heroui/react"
 import { createUser, deleteUser, fetchUsers, type User } from "../../lib/api"
 import { AddUserForm } from "./AddUserForm"
 import { UserList } from "./UserList"
@@ -64,12 +64,11 @@ export function UsersManager(): JSX.Element {
                     ))}
                 </div>
             ) : query.isError ? (
-                <p
-                    className="py-6 text-center text-sm font-medium text-danger"
+                <ErrorMessage
                     data-testid="users-error"
                 >
                     Error: {(query.error as Error).message}
-                </p>
+                </ErrorMessage>
             ) : (
                 <UserList
                     users={query.data}

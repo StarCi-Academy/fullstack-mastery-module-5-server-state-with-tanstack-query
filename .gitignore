@@ -27,3 +27,4 @@ vendor/
 go-out.txt
 go-err.txt
 *.tsbuildinfo
+.DS_Store

@@ -8,7 +8,9 @@ import {
     Param,
     ParseIntPipe,
     Post,
+    UseInterceptors,
 } from "@nestjs/common"
+import { ResponseDelayInterceptor } from "../common"
 import { CreateUserDto } from "./dto"
 import { UsersService, type User } from "./users.service"
 
@@ -16,6 +18,7 @@ import { UsersService, type User } from "./users.service"
  * UsersController — minimal REST CRUD for the TanStack mutations FE.
  */
 @Controller("users")
+@UseInterceptors(ResponseDelayInterceptor)
 export class UsersController {
     private readonly logger = new Logger(UsersController.name)
     constructor(private readonly usersService: UsersService) {}
