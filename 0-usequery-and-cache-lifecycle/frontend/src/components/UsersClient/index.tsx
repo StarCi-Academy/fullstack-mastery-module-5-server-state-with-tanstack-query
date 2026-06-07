@@ -56,15 +56,15 @@ export function UsersClient(): JSX.Element {
                 </Button>
             </div>
 
-            <div className="h-3" />
+            <div className="h-6" />
 
             {/* body: skeleton → error → list */}
             {query.isPending ? (
-                <div className="flex flex-col gap-1" data-testid="users-skeleton">
+                <div className="flex flex-col gap-3" data-testid="users-skeleton">
                     {[0, 1, 2].map((row) => (
-                        <div key={row} className="flex items-center gap-3 px-2 py-2">
+                        <div key={row} className="flex items-center gap-3">
                             <Skeleton className="size-9 shrink-0 rounded-full" />
-                            <div className="flex flex-1 flex-col gap-1.5">
+                            <div className="flex flex-1 flex-col">
                                 <Skeleton className="h-3.5 w-28 rounded-md" />
                                 <Skeleton className="h-3 w-40 rounded-md" />
                             </div>
@@ -82,7 +82,7 @@ export function UsersClient(): JSX.Element {
                     aria-label="Users"
                     selectionMode="none"
                     data-testid="users-list"
-                    className="gap-0.5"
+                    className="gap-3 p-0"
                 >
                     {query.data.map((user) => (
                         <ListBox.Item
@@ -90,7 +90,7 @@ export function UsersClient(): JSX.Element {
                             id={String(user.id)}
                             textValue={user.name}
                             data-testid={`user-${user.id}`}
-                            className="rounded-xl px-2 py-2 data-[hovered=true]:bg-default-100"
+                            className="rounded-none p-0 data-[hovered=true]:bg-default-100"
                         >
                             <div className="flex items-center gap-3">
                                 <Avatar size="sm" className="shrink-0">

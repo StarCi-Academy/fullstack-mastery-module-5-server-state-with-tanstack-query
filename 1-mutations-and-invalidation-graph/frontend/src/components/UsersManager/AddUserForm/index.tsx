@@ -31,7 +31,6 @@ export function AddUserForm({
             <TextField
                 value={name}
                 onChange={onNameChange}
-                className="flex flex-col gap-1"
             >
                 <Label className="text-sm text-muted">Name</Label>
                 <Input data-testid="input-name" placeholder="Alice" />
@@ -40,27 +39,24 @@ export function AddUserForm({
             <TextField
                 value={email}
                 onChange={onEmailChange}
-                className="flex flex-col gap-1"
             >
                 <Label className="text-sm text-muted">Email</Label>
                 <Input data-testid="input-email" placeholder="alice@example.com" />
             </TextField>
 
-            <div className="flex justify-start">
-                <Button
-                    type="submit"
-                    variant="primary"
-                    isPending={isPending}
-                    data-testid="btn-add"
-                >
-                    {({ isPending: pending }) => (
-                        <>
-                            {pending ? <Spinner color="current" size="sm" /> : null}
-                            Add user
-                        </>
-                    )}
-                </Button>
-            </div>
+            <Button
+                type="submit"
+                variant="primary"
+                isPending={isPending}
+                data-testid="btn-add"
+            >
+                {({ isPending: pending }) => (
+                    <>
+                        {pending ? <Spinner color="current" size="sm" /> : null}
+                        Add user
+                    </>
+                )}
+            </Button>
         </form>
     )
 }

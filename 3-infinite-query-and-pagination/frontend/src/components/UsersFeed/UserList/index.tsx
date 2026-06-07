@@ -15,7 +15,7 @@ export function UserList({ users }: UserListProps): JSX.Element {
             aria-label="Users"
             selectionMode="none"
             data-testid="users-list"
-            className="gap-0.5"
+            className="gap-3 p-0"
         >
             {users.map((user) => (
                 <ListBox.Item
@@ -23,7 +23,7 @@ export function UserList({ users }: UserListProps): JSX.Element {
                     id={String(user.id)}
                     textValue={user.name}
                     data-testid={`user-${user.id}`}
-                    className="rounded-xl px-2 py-2 data-[hovered=true]:bg-default-100"
+                    className="rounded-none p-0 data-[hovered=true]:bg-default-100"
                 >
                     <UserListItem user={user} />
                 </ListBox.Item>

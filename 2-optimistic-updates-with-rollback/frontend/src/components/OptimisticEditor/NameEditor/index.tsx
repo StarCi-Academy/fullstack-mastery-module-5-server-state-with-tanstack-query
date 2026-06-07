@@ -25,7 +25,6 @@ export function NameEditor({
             <TextField
                 value={draft}
                 onChange={onDraftChange}
-                className="flex flex-col gap-1"
             >
                 <Label className="text-sm text-muted">New name</Label>
                 <Input data-testid="input-name" placeholder="new name" />
@@ -44,21 +43,19 @@ export function NameEditor({
                 </Checkbox.Content>
             </Checkbox>
 
-            <div className="flex justify-start">
-                <Button
-                    variant="primary"
-                    isPending={isPending}
-                    data-testid="btn-save"
-                    onPress={onSave}
-                >
-                    {({ isPending: pending }) => (
-                        <>
-                            {pending ? <Spinner color="current" size="sm" /> : null}
-                            Save
-                        </>
-                    )}
-                </Button>
-            </div>
+            <Button
+                variant="primary"
+                isPending={isPending}
+                data-testid="btn-save"
+                onPress={onSave}
+            >
+                {({ isPending: pending }) => (
+                    <>
+                        {pending ? <Spinner color="current" size="sm" /> : null}
+                        Save
+                    </>
+                )}
+            </Button>
         </div>
     )
 }

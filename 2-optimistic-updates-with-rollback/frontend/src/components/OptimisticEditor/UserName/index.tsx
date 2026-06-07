@@ -17,7 +17,7 @@ const initials = (name: string) =>
  */
 export function UserName({ user }: UserNameProps): JSX.Element {
     return (
-        <div className="flex items-center gap-3 rounded-xl px-2 py-2">
+        <div className="flex items-center gap-3">
             <Avatar size="sm" className="shrink-0">
                 <AvatarImage src={avatarUrl(user.email)} alt={user.name} />
                 <AvatarFallback>{initials(user.name)}</AvatarFallback>

@@ -13,11 +13,11 @@ const PAGE_SIZE = 10
 /** Three placeholder rows shown while a page is loading. */
 function SkeletonRows({ testId }: { testId?: string }): JSX.Element {
     return (
-        <div className="flex flex-col gap-1" data-testid={testId}>
+        <div className="flex flex-col gap-3" data-testid={testId}>
             {[0, 1, 2].map((row) => (
-                <div key={row} className="flex items-center gap-3 px-2 py-2">
+                <div key={row} className="flex items-center gap-3">
                     <Skeleton className="size-9 shrink-0 rounded-full" />
-                    <div className="flex flex-1 flex-col gap-1.5">
+                    <div className="flex flex-1 flex-col">
                         <Skeleton className="h-3.5 w-28 rounded-md" />
                         <Skeleton className="h-3 w-40 rounded-md" />
                     </div>
@@ -85,10 +85,8 @@ export function UsersFeed(): JSX.Element {
                     <SkeletonRows testId="users-skeleton" />
                 </FeedScrollArea>
             ) : (
-                <>
+                <div className="flex flex-col gap-3">
                     <FeedStatus total={all.length} hasNextPage={hasNextPage} />
-
-                    <div className="h-3" />
 
                     <FeedScrollArea scrollRef={scrollRef}>
                         <UserList users={all} />
@@ -99,7 +97,7 @@ export function UsersFeed(): JSX.Element {
 
                         <div ref={sentinelRef} aria-hidden className="h-px w-full" />
                     </FeedScrollArea>
-                </>
+                </div>
             )}
         </div>
     )

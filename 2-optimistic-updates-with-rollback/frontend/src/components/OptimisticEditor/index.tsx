@@ -47,11 +47,11 @@ export function OptimisticEditor(): JSX.Element {
 
     if (query.isPending) {
         return (
-            <div className="flex flex-col gap-1" data-testid="users-skeleton">
+            <div className="flex flex-col gap-3" data-testid="users-skeleton">
                 {[0, 1, 2].map((row) => (
-                    <div key={row} className="flex items-center gap-3 px-2 py-2">
+                    <div key={row} className="flex items-center gap-3">
                         <Skeleton className="size-9 shrink-0 rounded-full" />
-                        <div className="flex flex-1 flex-col gap-1.5">
+                        <div className="flex flex-1 flex-col">
                             <Skeleton className="h-3.5 w-28 rounded-md" />
                             <Skeleton className="h-3 w-40 rounded-md" />
                         </div>
@@ -75,7 +75,7 @@ export function OptimisticEditor(): JSX.Element {
         <div className="flex flex-col">
             <UserName user={first} />
 
-            <div className="h-3" />
+            <div className="h-6" />
 
             <NameEditor
                 draft={draft}
