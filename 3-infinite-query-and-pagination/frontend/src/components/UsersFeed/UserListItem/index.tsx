@@ -1,7 +1,8 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@heroui/react"
+import { Avatar, AvatarFallback, AvatarImage, Typography } from "@heroui/react"
 import type { User } from "../../../lib/api"
 
 interface UserListItemProps {
+    /** User row rendered inside the infinite-scroll list. */
     user: User
 }
 
@@ -22,10 +23,12 @@ export function UserListItem({ user }: UserListItemProps): JSX.Element {
                 <AvatarFallback>{initials(user.name)}</AvatarFallback>
             </Avatar>
             <div className="flex min-w-0 flex-col">
-                <span className="truncate text-sm font-medium text-foreground">
+                <Typography.Paragraph size="sm" weight="medium" truncate>
                     {user.name}
-                </span>
-                <span className="truncate text-xs text-muted">{user.email}</span>
+                </Typography.Paragraph>
+                <Typography.Paragraph size="xs" color="muted" truncate>
+                    {user.email}
+                </Typography.Paragraph>
             </div>
         </div>
     )

@@ -1,10 +1,12 @@
-import { Controller, Get, Logger, Query } from "@nestjs/common"
+import { Controller, Get, Logger, Query, UseInterceptors } from "@nestjs/common"
+import { ResponseDelayInterceptor } from "../common"
 import { UsersService, type UsersPage } from "./users.service"
 
 /**
  * UsersController — GET /users?cursor=N&limit=M.
  */
 @Controller("users")
+@UseInterceptors(ResponseDelayInterceptor)
 export class UsersController {
     private readonly logger = new Logger(UsersController.name)
     constructor(private readonly usersService: UsersService) {}

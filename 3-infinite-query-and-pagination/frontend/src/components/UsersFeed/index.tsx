@@ -2,8 +2,9 @@
 
 import { useEffect, useRef } from "react"
 import { useInfiniteQuery } from "@tanstack/react-query"
-import { Skeleton, ScrollShadow } from "@heroui/react"
+import { ErrorMessage, Skeleton } from "@heroui/react"
 import { fetchUsersPage, type UsersPage } from "../../lib/api"
+import { FeedScrollArea } from "./FeedScrollArea"
 import { UserList } from "./UserList"
 import { FeedStatus } from "./FeedStatus"
 
@@ -75,42 +76,29 @@ export function UsersFeed(): JSX.Element {
     return (
         <div className="flex flex-col">
             {query.isError ? (
-                <p
-                    className="py-6 text-center text-sm font-medium text-danger"
-                    data-testid="users-error"
-                >
+                <ErrorMessage data-testid="users-error">
                     Error: {(query.error as Error).message}
-                </p>
+                </ErrorMessage>
             ) : query.isPending ? (
-                // Initial load — placeholder rows for the very first page.
-                <SkeletonRows testId="users-skeleton" />
+                // Initial load — skeleton inside the same ScrollShadow box learners scroll later.
+                <FeedScrollArea scrollRef={scrollRef}>
+                    <SkeletonRows testId="users-skeleton" />
+                </FeedScrollArea>
             ) : (
                 <>
                     <FeedStatus total={all.length} hasNextPage={hasNextPage} />
 
                     <div className="h-3" />
 
-                    {/* Fixed-height scroll box: the list overflows so the sentinel
-                        sits below the fold until the learner scrolls down. A
-                        HeroUI ScrollShadow fades the top/bottom edges to signal
-                        more content instead of a hard border. It owns the
-                        overflow + forwards the ref to the real scroll node, so
-                        the IntersectionObserver still uses it as its root. */}
-                    <ScrollShadow
-                        ref={scrollRef}
-                        data-testid="users-scroll"
-                        className="max-h-96 rounded-2xl p-1"
-                    >
+                    <FeedScrollArea scrollRef={scrollRef}>
                         <UserList users={all} />
 
-                        {/* Loading the next page — signal with skeleton rows. */}
                         {isFetchingNextPage ? (
                             <SkeletonRows testId="users-loading-more" />
                         ) : null}
 
-                        {/* Sentinel observed for infinite scroll. */}
                         <div ref={sentinelRef} aria-hidden className="h-px w-full" />
-                    </ScrollShadow>
+                    </FeedScrollArea>
                 </>
             )}
         </div>

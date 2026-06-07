@@ -1,5 +1,9 @@
+import { Typography } from "@heroui/react"
+
 interface FeedStatusProps {
+    /** Total rows accumulated across all loaded pages. */
     total: number
+    /** Whether useInfiniteQuery reports another page is available. */
     hasNextPage: boolean
 }
 
@@ -10,7 +14,7 @@ interface FeedStatusProps {
 export function FeedStatus({ total, hasNextPage }: FeedStatusProps): JSX.Element {
     return (
         <div className="flex items-center justify-between gap-3">
-            <span className="text-sm text-muted">
+            <Typography.Paragraph size="sm" color="muted">
                 Loaded{" "}
                 <span
                     className="font-semibold text-foreground"
@@ -19,8 +23,8 @@ export function FeedStatus({ total, hasNextPage }: FeedStatusProps): JSX.Element
                     {total}
                 </span>{" "}
                 users
-            </span>
-            <span className="text-sm text-muted">
+            </Typography.Paragraph>
+            <Typography.Paragraph size="sm" color="muted">
                 more:{" "}
                 <span
                     className="font-semibold text-foreground"
@@ -28,7 +32,7 @@ export function FeedStatus({ total, hasNextPage }: FeedStatusProps): JSX.Element
                 >
                     {hasNextPage ? "yes" : "no"}
                 </span>
-            </span>
+            </Typography.Paragraph>
         </div>
     )
 }
