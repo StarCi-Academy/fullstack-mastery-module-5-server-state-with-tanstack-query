@@ -11,7 +11,7 @@ interface FeedStatusProps {
  * FeedStatus — read-only feed header: how many rows are loaded and whether more
  * pages remain. No action button; loading happens by scrolling (infinite scroll).
  */
-export function FeedStatus({ total, hasNextPage }: FeedStatusProps): JSX.Element {
+export const FeedStatus = ({ total, hasNextPage }: FeedStatusProps): JSX.Element => {
     return (
         <div className="flex items-center justify-between gap-3">
             <Typography.Paragraph size="sm" color="muted">

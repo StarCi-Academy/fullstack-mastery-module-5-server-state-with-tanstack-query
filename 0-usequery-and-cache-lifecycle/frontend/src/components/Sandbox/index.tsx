@@ -7,6 +7,6 @@ import { UsersClient } from "../UsersClient"
  * sandbox renders the same single client as Local — no multi-pane tabs. The
  * split is kept for a uniform `?sandbox` switch across the whole course.
  */
-export function Sandbox(): JSX.Element {
+export const Sandbox = (): JSX.Element => {
     return <UsersClient />
 }

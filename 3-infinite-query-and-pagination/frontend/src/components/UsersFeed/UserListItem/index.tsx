@@ -15,7 +15,7 @@ const initials = (name: string) =>
 /**
  * UserListItem — avatar + name + email row.
  */
-export function UserListItem({ user }: UserListItemProps): JSX.Element {
+export const UserListItem = ({ user }: UserListItemProps): JSX.Element => {
     return (
         <div className="flex items-center gap-3">
             <Avatar size="sm" className="shrink-0">

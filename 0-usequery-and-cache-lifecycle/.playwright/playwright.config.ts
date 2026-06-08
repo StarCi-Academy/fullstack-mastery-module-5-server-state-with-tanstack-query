@@ -2,11 +2,11 @@ import { defineConfig, devices } from "@playwright/test"
 
 /**
  * Playwright config — testDir points to ./scripts.
- * Ports + base URL read from env (BACKEND_PORT / FRONTEND_PORT / FRONTEND_ORIGIN) to support
+ * Ports + base URL read from env (BE_PORT / FE_PORT / FRONTEND_ORIGIN) to support
  * parallel-audit port ranges; default 3000/3001 for a single session.
  */
-const backendPort = parseInt(process.env.BACKEND_PORT ?? "3000", 10)
-const frontendPort = parseInt(process.env.FRONTEND_PORT ?? "3001", 10)
+const backendPort = parseInt(process.env.BE_PORT ?? "3000", 10)
+const frontendPort = parseInt(process.env.FE_PORT ?? "3001", 10)
 const frontendOrigin = process.env.FRONTEND_ORIGIN ?? `http://localhost:${frontendPort}`
 
 export default defineConfig({
@@ -34,7 +34,7 @@ export default defineConfig({
             cwd: "../frontend",
             port: frontendPort,
             env: {
-                PORT: String(frontendPort),
+                FE_PORT: String(frontendPort),
                 VITE_API_BASE: `http://localhost:${backendPort}`,
             },
             reuseExistingServer: !process.env.CI,

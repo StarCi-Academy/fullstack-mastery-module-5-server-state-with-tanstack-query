@@ -12,10 +12,10 @@ interface FeedScrollAreaProps extends PropsWithChildren {
  * ScrollShadow owns overflow-y and updates top/bottom fade masks as the learner
  * scrolls through accumulated infinite-query pages.
  */
-export function FeedScrollArea({
+export const FeedScrollArea = ({
     scrollRef,
     children,
-}: FeedScrollAreaProps): JSX.Element {
+}: FeedScrollAreaProps): JSX.Element => {
     return (
         <ScrollShadow
             ref={scrollRef}

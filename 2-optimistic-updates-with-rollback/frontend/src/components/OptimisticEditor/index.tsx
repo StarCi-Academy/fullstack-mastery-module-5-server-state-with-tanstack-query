@@ -17,7 +17,7 @@ const USERS_KEY = ["users"] as const
  * onSettled invalidates to re-sync with server. The title/description are owned
  * by App, so this body has no heading of its own.
  */
-export function OptimisticEditor(): JSX.Element {
+export const OptimisticEditor = (): JSX.Element => {
     const qc = useQueryClient()
     const [draft, setDraft] = useState("")
     const [shouldFail, setShouldFail] = useState(false)
@@ -72,10 +72,8 @@ export function OptimisticEditor(): JSX.Element {
     const first = query.data[0]
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-6">
             <UserName user={first} />
-
-            <div className="h-6" />
 
             <NameEditor
                 draft={draft}

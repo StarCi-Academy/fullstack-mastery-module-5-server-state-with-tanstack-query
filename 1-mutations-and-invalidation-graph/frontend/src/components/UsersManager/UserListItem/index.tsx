@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage, Button } from "@heroui/react"
+import { Avatar, AvatarFallback, AvatarImage, Button, Typography } from "@heroui/react"
 import type { User } from "../../../lib/api"
 
 interface UserListItemProps {
@@ -15,7 +15,7 @@ const initials = (name: string) =>
 /**
  * UserListItem — avatar + name + email + delete button row.
  */
-export function UserListItem({ user, onDelete }: UserListItemProps): JSX.Element {
+export const UserListItem = ({ user, onDelete }: UserListItemProps): JSX.Element => {
     return (
         <div className="flex items-center gap-3">
             <Avatar size="sm" className="shrink-0">
@@ -23,13 +23,15 @@ export function UserListItem({ user, onDelete }: UserListItemProps): JSX.Element
                 <AvatarFallback>{initials(user.name)}</AvatarFallback>
             </Avatar>
             <div className="flex min-w-0 flex-1 flex-col">
-                <span className="truncate text-sm font-medium text-foreground">
+                <Typography.Paragraph size="sm" weight="medium" truncate>
                     {user.name}
-                </span>
-                <span className="truncate text-xs text-muted">{user.email}</span>
+                </Typography.Paragraph>
+                <Typography.Paragraph size="xs" color="muted" truncate>
+                    {user.email}
+                </Typography.Paragraph>
             </div>
             <Button
-                variant="ghost"
+                variant="danger"
                 size="sm"
                 data-testid={`delete-${user.id}`}
                 onPress={() => onDelete(user.id)}

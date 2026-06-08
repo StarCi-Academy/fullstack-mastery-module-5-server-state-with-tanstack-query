@@ -12,17 +12,18 @@ interface NameEditorProps {
 /**
  * NameEditor — new-name input, fail checkbox, and save button.
  */
-export function NameEditor({
+export const NameEditor = ({
     draft,
     shouldFail,
     isPending,
     onDraftChange,
     onShouldFailChange,
     onSave,
-}: NameEditorProps): JSX.Element {
+}: NameEditorProps): JSX.Element => {
     return (
         <div className="flex flex-col gap-3">
             <TextField
+                className="flex flex-col gap-1.5"
                 value={draft}
                 onChange={onDraftChange}
             >

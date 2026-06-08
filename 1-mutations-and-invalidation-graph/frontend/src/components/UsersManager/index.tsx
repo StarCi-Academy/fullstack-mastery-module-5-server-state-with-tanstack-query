@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { ErrorMessage, Skeleton } from "@heroui/react"
+import { ErrorMessage, Skeleton, Typography } from "@heroui/react"
 import { createUser, deleteUser, fetchUsers, type User } from "../../lib/api"
 import { AddUserForm } from "./AddUserForm"
 import { UserList } from "./UserList"
@@ -13,7 +13,7 @@ import { UserList } from "./UserList"
  * setState needed. The title/description are owned by App, so this body has no
  * heading of its own.
  */
-export function UsersManager(): JSX.Element {
+export const UsersManager = (): JSX.Element => {
     const qc = useQueryClient()
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -35,7 +35,7 @@ export function UsersManager(): JSX.Element {
     })
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-6">
             <AddUserForm
                 name={name}
                 email={email}
@@ -49,15 +49,17 @@ export function UsersManager(): JSX.Element {
                 }}
             />
 
-            <div className="h-6" />
-
             {/* Background refetch indicator: bound to isFetching, NOT isPending —
                 shows only when a refetch runs *after* data already exists (e.g. an
                 invalidate), so the old rows stay (stale-while-revalidate). */}
             {query.isFetching && !query.isPending ? (
-                <span data-testid="list-refreshing" className="text-xs text-muted">
+                <Typography.Paragraph
+                    size="xs"
+                    color="muted"
+                    data-testid="list-refreshing"
+                >
                     Refreshing…
-                </span>
+                </Typography.Paragraph>
             ) : null}
 
             {query.isPending ? (

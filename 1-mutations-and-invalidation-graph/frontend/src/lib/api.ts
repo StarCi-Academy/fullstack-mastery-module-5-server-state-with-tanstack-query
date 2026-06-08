@@ -8,7 +8,7 @@ const BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:3000"
 /**
  * Fetch user list.
  */
-export async function fetchUsers(): Promise<User[]> {
+export const fetchUsers = async (): Promise<User[]> => {
     const res = await fetch(`${BASE}/users`)
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     return (await res.json()) as User[]
@@ -17,7 +17,7 @@ export async function fetchUsers(): Promise<User[]> {
 /**
  * Create a new user.
  */
-export async function createUser(input: { name: string; email: string }): Promise<User> {
+export const createUser = async (input: { name: string; email: string }): Promise<User> => {
     const res = await fetch(`${BASE}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,7 +30,7 @@ export async function createUser(input: { name: string; email: string }): Promis
 /**
  * Delete user by id.
  */
-export async function deleteUser(id: number): Promise<void> {
+export const deleteUser = async (id: number): Promise<void> => {
     const res = await fetch(`${BASE}/users/${id}`, { method: "DELETE" })
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
 }

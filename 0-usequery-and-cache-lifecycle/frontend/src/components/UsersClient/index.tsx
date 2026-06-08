@@ -29,7 +29,7 @@ const initials = (name: string) =>
  * isFetching (spinner on the refresh button) to learn the cache lifecycle. The
  * title/description are owned by App, so this body has no heading of its own.
  */
-export function UsersClient(): JSX.Element {
+export const UsersClient = (): JSX.Element => {
     const query = useQuery<User[]>({
         queryKey: ["users"],
         queryFn: fetchUsers,
@@ -39,7 +39,7 @@ export function UsersClient(): JSX.Element {
     })
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-6">
             {/* refresh action */}
             <div className="flex justify-start">
                 <Button
@@ -55,8 +55,6 @@ export function UsersClient(): JSX.Element {
                     )}
                 </Button>
             </div>
-
-            <div className="h-6" />
 
             {/* body: skeleton → error → list */}
             {query.isPending ? (

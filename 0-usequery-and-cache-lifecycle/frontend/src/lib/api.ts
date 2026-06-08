@@ -8,7 +8,7 @@ const BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:3000"
 /**
  * Typed fetcher; QueryClient owns caching.
  */
-export async function fetchUsers(): Promise<User[]> {
+export const fetchUsers = async (): Promise<User[]> => {
     const res = await fetch(`${BASE}/users`)
     if (!res.ok) {
         throw new Error(`HTTP ${res.status}`)

@@ -12,14 +12,14 @@ interface AddUserFormProps {
 /**
  * AddUserForm — controlled form with name + email inputs and an add button.
  */
-export function AddUserForm({
+export const AddUserForm = ({
     name,
     email,
     onNameChange,
     onEmailChange,
     isPending,
     onSubmit,
-}: AddUserFormProps): JSX.Element {
+}: AddUserFormProps): JSX.Element => {
     return (
         <form
             className="flex flex-col gap-3"
@@ -29,6 +29,7 @@ export function AddUserForm({
             }}
         >
             <TextField
+                className="flex flex-col gap-1.5"
                 value={name}
                 onChange={onNameChange}
             >
@@ -37,6 +38,7 @@ export function AddUserForm({
             </TextField>
 
             <TextField
+                className="flex flex-col gap-1.5"
                 value={email}
                 onChange={onEmailChange}
             >

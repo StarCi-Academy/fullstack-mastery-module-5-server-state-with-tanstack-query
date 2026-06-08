@@ -10,7 +10,7 @@ interface UserListProps {
 /**
  * UserList — renders all users in a HeroUI ListBox.
  */
-export function UserList({ users, onDelete }: UserListProps): JSX.Element {
+export const UserList = ({ users, onDelete }: UserListProps): JSX.Element => {
     return (
         <ListBox
             aria-label="Users"

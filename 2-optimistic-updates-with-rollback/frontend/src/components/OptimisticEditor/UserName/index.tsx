@@ -15,7 +15,7 @@ const initials = (name: string) =>
 /**
  * UserName — displays the current (possibly optimistic) name for user #1.
  */
-export function UserName({ user }: UserNameProps): JSX.Element {
+export const UserName = ({ user }: UserNameProps): JSX.Element => {
     return (
         <div className="flex items-center gap-3">
             <Avatar size="sm" className="shrink-0">

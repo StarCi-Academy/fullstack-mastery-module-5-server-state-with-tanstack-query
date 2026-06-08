@@ -8,7 +8,7 @@ const BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:3000"
 /**
  * Fetch user list.
  */
-export async function fetchUsers(): Promise<User[]> {
+export const fetchUsers = async (): Promise<User[]> => {
     const res = await fetch(`${BASE}/users`)
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     return (await res.json()) as User[]
@@ -17,11 +17,11 @@ export async function fetchUsers(): Promise<User[]> {
 /**
  * Patch user; if `fail`, append `?fail=true` so the server returns 500.
  */
-export async function patchUser(args: {
+export const patchUser = async (args: {
     id: number
     name: string
     fail?: boolean
-}): Promise<User> {
+}): Promise<User> => {
     const url = `${BASE}/users/${args.id}${args.fail ? "?fail=true" : ""}`
     const res = await fetch(url, {
         method: "PATCH",

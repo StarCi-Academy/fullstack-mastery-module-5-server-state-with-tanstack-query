@@ -10,8 +10,9 @@ import { FeedStatus } from "./FeedStatus"
 
 const PAGE_SIZE = 10
 
-/** Three placeholder rows shown while a page is loading. */
-function SkeletonRows({ testId }: { testId?: string }): JSX.Element {
+interface SkeletonRowsProps { testId?: string }
+
+const SkeletonRows = ({ testId }: SkeletonRowsProps): JSX.Element => {
     return (
         <div className="flex flex-col gap-3" data-testid={testId}>
             {[0, 1, 2].map((row) => (
@@ -38,7 +39,7 @@ function SkeletonRows({ testId }: { testId?: string }): JSX.Element {
  * load and while the next page is loading. This is the shared lesson content
  * used by both Local and Sandbox; the title/description are owned by App.
  */
-export function UsersFeed(): JSX.Element {
+export const UsersFeed = (): JSX.Element => {
     const query = useInfiniteQuery<UsersPage, Error>({
         queryKey: ["users", "infinite"],
         queryFn: ({ pageParam }) =>

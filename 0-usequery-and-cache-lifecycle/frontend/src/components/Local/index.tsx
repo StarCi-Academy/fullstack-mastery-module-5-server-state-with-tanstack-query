@@ -10,15 +10,14 @@ const LINK_CLASS =
  * Home — the `/` route. The users query is NOT mounted here, so leaving and
  * returning to `/users` is what demonstrates the cache lifecycle.
  */
-function Home(): JSX.Element {
+const Home = (): JSX.Element => {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-3">
             <Typography.Paragraph size="sm" color="muted">
                 The users query is not mounted on this page. Open the users list to
                 fetch (and cache) it, then come back here and return — the second
                 visit is served from cache within <Typography.Code>staleTime</Typography.Code>.
             </Typography.Paragraph>
-            <div className="h-3" />
             <Link to="/users" data-testid="link-users" className={LINK_CLASS}>
                 Go to users →
             </Link>
@@ -29,13 +28,12 @@ function Home(): JSX.Element {
 /**
  * UsersRoute — the `/users` route: a back link plus the cached users list.
  */
-function UsersRoute(): JSX.Element {
+const UsersRoute = (): JSX.Element => {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-3">
             <Link to="/" data-testid="link-home" className={LINK_CLASS}>
                 ← Back home
             </Link>
-            <div className="h-3" />
             <UsersClient />
         </div>
     )
@@ -49,7 +47,7 @@ function UsersRoute(): JSX.Element {
  * cache with no extra request. This is exactly what the Playwright specs drive
  * (`goto("/users")`, `link-home`/`link-users`).
  */
-export function Local(): JSX.Element {
+export const Local = (): JSX.Element => {
     return (
         <BrowserRouter>
             <Routes>

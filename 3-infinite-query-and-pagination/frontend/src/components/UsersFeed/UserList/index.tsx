@@ -9,7 +9,7 @@ interface UserListProps {
 /**
  * UserList — renders accumulated pages in a HeroUI ListBox.
  */
-export function UserList({ users }: UserListProps): JSX.Element {
+export const UserList = ({ users }: UserListProps): JSX.Element => {
     return (
         <ListBox
             aria-label="Users"
