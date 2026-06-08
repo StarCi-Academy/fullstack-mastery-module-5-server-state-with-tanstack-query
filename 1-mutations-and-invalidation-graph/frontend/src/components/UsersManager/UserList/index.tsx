@@ -16,7 +16,7 @@ export const UserList = ({ users, onDelete }: UserListProps): JSX.Element => {
             aria-label="Users"
             selectionMode="none"
             data-testid="users-list"
-            className="gap-3 p-0"
+            className="gap-1 p-0"
         >
             {users.map((user) => (
                 <ListBox.Item
@@ -24,7 +24,7 @@ export const UserList = ({ users, onDelete }: UserListProps): JSX.Element => {
                     id={String(user.id)}
                     textValue={user.name}
                     data-testid={`user-${user.id}`}
-                    className="rounded-none p-0 data-[hovered=true]:bg-default-100"
+                    className="data-[hovered=true]:bg-default-100"
                 >
                     <UserListItem user={user} onDelete={onDelete} />
                 </ListBox.Item>

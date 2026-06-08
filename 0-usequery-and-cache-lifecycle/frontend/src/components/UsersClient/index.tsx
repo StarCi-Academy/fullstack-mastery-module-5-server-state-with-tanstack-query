@@ -80,7 +80,7 @@ export const UsersClient = (): JSX.Element => {
                     aria-label="Users"
                     selectionMode="none"
                     data-testid="users-list"
-                    className="gap-3 p-0"
+                    className="gap-1 p-0"
                 >
                     {query.data.map((user) => (
                         <ListBox.Item
@@ -88,7 +88,7 @@ export const UsersClient = (): JSX.Element => {
                             id={String(user.id)}
                             textValue={user.name}
                             data-testid={`user-${user.id}`}
-                            className="rounded-none p-0 data-[hovered=true]:bg-default-100"
+                            className="data-[hovered=true]:bg-default-100"
                         >
                             <div className="flex items-center gap-3">
                                 <Avatar size="sm" className="shrink-0">
