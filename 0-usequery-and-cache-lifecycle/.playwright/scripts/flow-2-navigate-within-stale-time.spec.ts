@@ -6,10 +6,12 @@ import { test, expect } from "@playwright/test"
  * Pass criteria: only one /users request fires across two mounts.
  */
 test("flow 2 — re-mount within staleTime hits cache (one network call)", async ({ page }) => {
+    // Backend origin honors BE_PORT so the counter targets whatever port the run uses.
+    const apiUsers = `http://localhost:${process.env.BE_PORT ?? "3000"}/users`
     let usersCalls = 0
     page.on("request", (req) => {
         // Count only NestJS API calls; ignore non-API browser navigation (Vite HMR, etc.).
-        if (req.url().startsWith("http://localhost:3000/users") && req.method() === "GET") {
+        if (req.url().startsWith(apiUsers) && req.method() === "GET") {
             usersCalls += 1
         }
     })

@@ -6,10 +6,12 @@ import { test, expect } from "@playwright/test"
  * Pass criteria: after blur/focus, a second /users request is issued.
  */
 test("flow 3 — window blur+focus triggers a background refetch", async ({ page, context }) => {
+    // Backend origin honors BE_PORT so the counter targets whatever port the run uses.
+    const apiUsers = `http://localhost:${process.env.BE_PORT ?? "3000"}/users`
     let usersCalls = 0
     page.on("request", (req) => {
         // Count only NestJS API calls; ignore non-API browser navigation (Vite HMR, etc.).
-        if (req.url().startsWith("http://localhost:3000/users") && req.method() === "GET") {
+        if (req.url().startsWith(apiUsers) && req.method() === "GET") {
             usersCalls += 1
         }
     })
